@@ -1,0 +1,14 @@
+<header>
+  <nav>
+    <ul>
+      <li><a routerLink="/">Dashboard</a></li>
+      <li><a routerLink="/info">Info</a></li>
+    </ul>
+  </nav>
+  <section class="profile">
+    <ul>
+      <li *ngIf="!currentUser"><button (click)="onLoginButtonClicked()">login</button></li>
+      <li *ngIf="currentUser"><button (click)="onLogoutButtonClicked()">logout</button></li>
+    </ul>
+  </section>
+</header>
