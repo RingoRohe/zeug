@@ -1,8 +1,14 @@
 <header>
-  <nav>
+  <h1 class="app-title">My Zeug</h1>
+  <nav class="main-menu">
     <ul>
-      <li><a routerLink="/">Dashboard</a></li>
-      <li><a routerLink="/info">Info</a></li>
+      <li *ngFor="let menuPoint of menuPoints">
+        <app-menu-point
+          [to]="menuPoint.target"
+          [classes]="menuPoint.classes"
+          [text]="menuPoint.text">
+        </app-menu-point>
+      </li>
     </ul>
   </nav>
   <section class="profile">

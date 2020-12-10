@@ -1,0 +1,44 @@
+@import '../../../assets/scss/colors';
+@import '../../../assets/scss/breakpoints';
+
+header {
+    grid-area: header;
+    background-color: $black;
+
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      "headline headline"
+      "nav profile";
+
+    .app-title {
+      grid-area: headline;
+      font-size: 1.2rem;
+      margin: 0;
+      color: $light;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-align: center;
+      padding-top: 1em;
+
+      @media (min-width: $breakpoints_m) {
+          font-size: 1.8rem;
+      }
+    }
+
+    .main-menu {
+      grid-area: nav;
+
+      ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+      }
+    }
+
+    .profile {
+      grid-area: profile;
+      padding: 1em;
+    }
+}

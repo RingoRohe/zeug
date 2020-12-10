@@ -4,6 +4,11 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/User';
 import { Router } from '@angular/router';
 
+interface MenuPoint {
+  target: string,
+  classes: string,
+  text: string
+}
 
 @Component({
   selector: 'app-header',
@@ -12,6 +17,23 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
+  menuPoints: MenuPoint[] = [
+    {
+      target: '/',
+      classes: 'icon fas fa-columns fa-3x',
+      text: 'Dashboard'
+    },
+    {
+      target: '/info',
+      classes: 'icon fas fa-info fa-3x',
+      text: 'Info'
+    },
+    {
+      target: '/',
+      classes: 'icon fas fa-bicycle fa-3x',
+      text: 'Stuff'
+    },
+  ]
 
   constructor(
     private userService: UserService,

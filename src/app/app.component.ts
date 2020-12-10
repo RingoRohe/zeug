@@ -14,11 +14,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.user.createUser('ringo.rohe@gmail.com', 'Rr17Zg83', 'Ringo');
-    // this.user.createUser('ringo.rohe+spam@gmail.com', 'Rr17Zg83', 'Ringo (spam)');
-    // this.user.login('hallo@ringorohe.de', 'Rr17Zg83');
-    // this.user.logout();
     this.user.getCurrentUser();
-    // this.user.sendVerification();
   }
 }

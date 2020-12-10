@@ -1,19 +1,21 @@
 <h2>Login</h2>
 
-<div>Want to create an Account? <a routerLink="/user/register">Go to our Sign Up Form.</a></div>
 
-<div class="loginForm" *ngIf="!currentUser">
+<div class="loginForm" [ngClass]="{'loading': loading}" [hidden]="success" *ngIf="!currentUser">
+  <div>Want to create an Account? <a routerLink="/user/register">Go to our Sign Up Form.</a></div>
+
   <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)">
     <fieldset>
       <div>
         <label for="email">E-Mail</label>
         <input type="text" formControlName="email" id="email">
+        <p class="error" *ngIf="email.invalid && email.touched">This is not a propper E-Mail Adress.</p>
       </div>
       <div>
         <label for="password">E-Mail</label>
         <input type="password" formControlName="password" id="password">
       </div>
-      <button type="submit">login</button>
+      <button type="submit" [disabled]="loginForm.invalid">login</button>
     </fieldset>
   </form>
 </div>

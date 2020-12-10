@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { User } from 'src/app/models/User';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from '../../../models/User';
 import { UserService } from '../../../services/user.service';
 
 @Component({
@@ -11,15 +11,26 @@ import { UserService } from '../../../services/user.service';
 export class LoginComponent implements OnInit {
   currentUser: User;
   loginForm: FormGroup;
+  success: boolean = false;
+  error: string = null;
+  loading: boolean = false;
 
   constructor(
     private userService: UserService,
     private formBuilder: FormBuilder
   ) {
     this.loginForm = this.formBuilder.group({
-      email: '',
-      password: ''
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]]
     });
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
   }
 
   ngOnInit(): void {
@@ -29,9 +40,27 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginFormSubmit(formData): void {
-    this.userService.login(formData.email, formData.password);
-    this.loginForm.reset();
-    // console.log(formData);
+    this.loading = true;
+    this.userService.login(formData.email, formData.password)
+      .then(
+        (success) => {
+          this.loginForm.reset();
+          this.success = true;
+          this.error = null;
+          console.log(success);
+        },
+        (error) => {
+          this.loginForm.reset();
+          this.error = error;
+          this.success = false;
+          console.log(error);
+        }
+      )
+      .finally(
+        () => {
+          this.loading = false;
+        }
+      );
   }
 
 }

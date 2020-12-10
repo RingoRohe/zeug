@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfoComponent } from './components/info/info.component';
+import { MenuPointComponent } from './components/shared/menu-point/menu-point.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { InfoComponent } from './components/info/info.component';
     VerificationComponent,
     DashboardComponent,
     RegisterComponent,
-    InfoComponent
+    InfoComponent,
+    MenuPointComponent
   ],
   imports: [
     AppRoutingModule,

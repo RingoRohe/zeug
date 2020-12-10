@@ -1,0 +1,19 @@
+.menu-point {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 1em;
+
+  .icon {
+    margin: 0 auto .2em;
+    width: 4rem;
+    text-align: center;
+  }
+
+  .text {
+    font-size: 1em;
+    width: auto;
+    margin: 0;
+    text-align: center;
+  }
+}
