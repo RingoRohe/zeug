@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
 
@@ -14,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private toast: ToastrService,
     private userService: UserService
   ) {
     this.path = this.router.url;
