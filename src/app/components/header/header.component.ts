@@ -29,10 +29,10 @@ export class HeaderComponent implements OnInit {
       text: 'Info'
     },
     {
-      target: '/',
-      classes: 'icon fas fa-bicycle fa-3x',
-      text: 'Stuff'
-    },
+      target: '/user/profile',
+      classes: 'icon fas fa-user fa-3x',
+      text: 'Profile'
+    }
   ]
 
   constructor(

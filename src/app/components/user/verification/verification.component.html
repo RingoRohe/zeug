@@ -1,16 +1,13 @@
-<h2>User Verification</h2>
+<section class="single-block">
+  <div class="wrapper section__login">
+    <h2>User Verification</h2>
 
-<div *ngIf="!currentUser">
-  <p>You need to <a routerLink="/user/login">login</a> first.</p>
-</div>
+    <div *ngIf="!currentUser">
+      <p>You need to <a [routerLink]="['/user/login']" [queryParams]="{backlink: currentPath}">login</a> first.</p>
+    </div>
 
-<div *ngIf="currentUser && currentUser.emailVerification">
-  <p>You are already verified. Have Fun! <a routerLink="/">Go to Dashboard</a></p>
-</div>
-
-<div *ngIf="currentUser && !currentUser.emailVerification">
-  <p>We sent you an E.Mail with a Verification Link. Please check your Inbox.</p>
-  <p>If you can't find our E-Mail (even in your Spam Folder), no Problem.
-    <button (click)="resendVerificationEmail()">Resend Verification E-Mail</button>
-  </p>
-</div>
+    <div *ngIf="currentUser && currentUser.emailVerification">
+      <p>You are already verified. Have Fun! <a routerLink="/">Go to Dashboard</a></p>
+    </div>
+  </div>
+</section>

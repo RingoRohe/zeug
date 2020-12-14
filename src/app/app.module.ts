@@ -13,6 +13,7 @@ import { RegisterComponent } from './components/user/register/register.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfoComponent } from './components/info/info.component';
 import { MenuPointComponent } from './components/shared/menu-point/menu-point.component';
+import { ProfileComponent } from './components/user/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MenuPointComponent } from './components/shared/menu-point/menu-point.co
     DashboardComponent,
     RegisterComponent,
     InfoComponent,
-    MenuPointComponent
+    MenuPointComponent,
+    ProfileComponent
   ],
   imports: [
     AppRoutingModule,

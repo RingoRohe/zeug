@@ -1,0 +1,20 @@
+<section class="single-block">
+  <div *ngIf="currentUser" class="wrapper section__login">
+    <h2>Hello {{ currentUser.name}}</h2>
+    <div *ngIf="currentUser.emailVerification">
+      <p>At the Moment you can only <a (click)="deleteUser()">delete yourself</a>. More to come.</p>
+    </div>
+
+    <div *ngIf="!currentUser.emailVerification">
+      <p>You have not verified your Account yet.</p>
+      <p>We sent you an E-Mail with a Verification Link. Please check your Inbox.</p>
+      <p>If you can't find our E-Mail (even in your Spam Folder), no Problem.</p>
+      <button (click)="resendVerificationEmail()">Resend Verification E-Mail</button>
+    </div>
+  </div>
+
+  <div *ngIf="!currentUser" class="wrapper section__login">
+    <h2>Profile</h2>
+    <p><a [routerLink]="['/user/login']" [queryParams]="{backlink:path}">Please Login first</a> to view your Profile.</p>
+  </div>
+</section>

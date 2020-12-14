@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../models/User';
 import { UserService } from '../../../services/user.service';
 
@@ -14,10 +15,13 @@ export class LoginComponent implements OnInit {
   success: boolean = false;
   error: string = null;
   loading: boolean = false;
+  private backlink: string = null;
 
   constructor(
-    private userService: UserService,
-    private formBuilder: FormBuilder
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private userService: UserService
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -34,8 +38,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.currentUser = this.userService.currentUser;
     this.userService.userHasChanged.subscribe((data) => {
       this.currentUser = data;
+    });
+    this.route.queryParams.subscribe((params) => {
+      this.backlink = params.backlink;
     });
   }
 
@@ -48,6 +56,9 @@ export class LoginComponent implements OnInit {
           this.success = true;
           this.error = null;
           console.log(success);
+          if (this.backlink) {
+            this.router.navigate([this.backlink]);
+          }
         },
         (error) => {
           this.loginForm.reset();
@@ -61,6 +72,11 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
+  }
+
+  resendVerificationEmail() {
+    console.log('resending...');
+    this.userService.sendVerification();
   }
 
 }

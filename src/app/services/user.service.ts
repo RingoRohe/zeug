@@ -27,72 +27,69 @@ export class UserService {
   createUser = (
     email: string,
     password: string,
-    name: string,
-    onSuccess: Function = null,
-    onError: Function = null
+    name: string
   ) => {
     console.log('api', 'createUser');
-    this.appwrite.account.create(email, password, name)
-      .then(
-        (response) => {
-          if (onSuccess && typeof onSuccess === 'function') {
-            onSuccess(response);
-          }
-          this.login(email, password)
-            .then((response) => {
-            this.sendVerification();
-            this.getCurrentUser();
-          });
-        },
-        (error) => {
-          if (onError && typeof onError === 'function') {
-            onError(error);
-          }
-        }
-      );
+    const promise = this.appwrite.account.create(email, password, name);
+    promise.then(
+      (response) => {
+        this.login(email, password)
+          .then((response) => {
+          this.sendVerification();
+          this.getCurrentUser();
+        });
+      },
+      (error) => {
+        console.error('Error happend on createUser:', error);
+      }
+    );
+    return promise;
   }
 
-  sendVerification = (
-    onSuccess: Function = null,
-    onError: Function = null
-  ) => {
+  sendVerification = () => {
     console.log('api', 'sendVerification');
-    this.appwrite.account.createVerification('http://localhost:4200/user/verify')
-      .then(
-        (response) => {
-          if (onSuccess && typeof onSuccess === 'function') {
-            onSuccess(response);
-          }
-        },
-        (error) => {
-          if (onError && typeof onError === 'function') {
-            onError(error);
-          }
-        }
-      );
+    const promise = this.appwrite.account.createVerification('http://localhost:4200/user/verify');
+    promise.then(
+      (response) => {
+
+      },
+      (error) => {
+        console.error('Error happend when sending Verification:', error);
+      }
+    );
+    return promise;
   }
 
   updateVerification = (
     userId: string,
-    secret: string,
-    onSuccess: Function = null,
-    onError: Function = null
+    secret: string
   ) => {
     console.log('api', 'updateVerification');
-    this.appwrite.account.updateVerification(userId, secret)
-      .then(
+    const promise = this.appwrite.account.updateVerification(userId, secret);
+    promise.then(
       (response) => {
-        if (onSuccess && typeof onSuccess === 'function') {
-          onSuccess(response);
-        }
         this.getCurrentUser();
       },
       (error) => {
-        if (onError && typeof onError === 'function') {
-          onError(error);
-        }
+        console.error('Error happend on Verification Update:', error);
       }
     );
+    return promise;
+  }
+
+  delete = () => {
+    console.log('api', 'delete Account (block)');
+    const promise = this.appwrite.account.delete();
+
+    promise.then((response) => {
+      console.log(response); // Success
+      this.currentUser = null;
+      this.updateSubscribers();
+    }, (error) => {
+      console.log('Error happened when deleting Account: ', error); // Failure
+    });
+
+    return promise;
   }
 
   login = (
@@ -110,47 +107,34 @@ export class UserService {
   }
 
   logout = (
-    sessionId: string = 'current',
-    onSuccess: Function = null,
-    onError: Function = null
+    sessionId: string = 'current'
   ) => {
     console.log('api', 'logout');
-    this.appwrite.account.deleteSession(sessionId)
-      .then(
-        (response: User) => {
-          if (onSuccess && typeof onSuccess === 'function') {
-            onSuccess(response);
-          }
-          this.currentUser = null;
-          this.updateSubscribers();
-        },
-        (error) => {
-          if (onError && typeof onError === 'function') {
-            onError(error);
-          }
-        }
-      );
+    const promise = this.appwrite.account.deleteSession(sessionId);
+    promise.then(
+      () => {
+        this.currentUser = null;
+        this.updateSubscribers();
+      },
+      (error) => {
+        console.error('Error happend on logout:', error);
+      }
+    );
+    return promise;
   }
 
-  getCurrentUser = (
-    onSuccess: Function = null,
-    onError: Function = null
-  ) => {
+  getCurrentUser = () => {
     console.log('api', 'getCurrentUser');
-    this.appwrite.account.get()
-      .then(
-        (response: User) => {
-          if (onSuccess && typeof onSuccess === 'function') {
-            onSuccess(response);
-          }
-          this.currentUser = response;
-          this.updateSubscribers();
-        },
-        (error) => {
-          if (onError && typeof onError === 'function') {
-            onError(error);
-          }
-        }
-      );
+    let promise = this.appwrite.account.get();
+    promise.then(
+      (response: User) => {
+        this.currentUser = response;
+        this.updateSubscribers();
+      },
+      (error) => {
+        console.warn('Can\'t get User. User not logged in.')
+      }
+    );
+    return promise;
   }
 }

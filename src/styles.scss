@@ -43,9 +43,12 @@ a {
     text-decoration: none;
     border-radius: 3px;
     padding: 2px 4px;
+    cursor: pointer;
 
     &:hover {
-        color: $white;
+        color: var(--color-white);
         background-color: var(--color-primary-shade);
     }
 }
+
+@import './assets/scss/shared';
