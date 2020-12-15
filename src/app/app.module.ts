@@ -11,6 +11,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { InfoComponent } from './components/info/info.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { MenuPointComponent } from './components/shared/menu-point/menu-point.component';
+import { NgPopupsModule } from 'ng-popups';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/user/register/register.component';
@@ -34,6 +35,7 @@ import { VerificationComponent } from './components/user/verification/verificati
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    NgPopupsModule.forRoot(),
     ReactiveFormsModule,
     ToastrModule.forRoot({positionClass: 'toast-top-center', progressBar: true})
   ],

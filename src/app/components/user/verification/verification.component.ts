@@ -20,6 +20,9 @@ export class VerificationComponent implements OnInit {
     // get current url path
     this.currentPath = this.router.url;
 
+    // get User
+    this.currentUser = this.userService.currentUser;
+
     // listen if User changes
     this.userService.userHasChanged.subscribe((data) => {
       this.currentUser = data;

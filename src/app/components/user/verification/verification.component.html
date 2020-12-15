@@ -7,7 +7,14 @@
     </div>
 
     <div *ngIf="currentUser && currentUser.emailVerification">
-      <p>You are already verified. Have Fun! <a routerLink="/">Go to Dashboard</a></p>
+      <p>You are already verified. Have Fun! <a [routerLink]="['/']">Go to Dashboard</a></p>
+    </div>
+
+    <div *ngIf="currentUser && !currentUser.emailVerification">
+      <p>You have not verified your Account yet.</p>
+      <p>We sent you an E-Mail with a Verification Link. Please check your Inbox.</p>
+      <p>If you can't find our E-Mail (even in your Spam Folder), no Problem.</p>
+      <button (click)="resendVerificationEmail()">Resend Verification E-Mail</button>
     </div>
   </div>
 </section>
