@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user.service';
@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
       password_confirm: ['', [Validators.required]]
-    });
+    }, {validator: this.passwordConfirming});
   }
 
   get username() {
@@ -45,10 +45,6 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('password_confirm');
   }
 
-  get password_match() {
-    return this.signupForm.get('match');
-  }
-
   ngOnInit(): void {
     this.currentUser = this.userService.currentUser;
     this.userService.userHasChanged.subscribe((data) => {
@@ -58,6 +54,15 @@ export class SignupComponent implements OnInit {
 
   onLoginFormSubmit() {
     this.loading = true;
+  }
+
+  passwordConfirming(c: AbstractControl): { password_missmatch: boolean } {
+    if (c.get('password').value !== c.get('password_confirm').value) {
+      c.get('password_confirm').setErrors({invalid: true});
+      return {password_missmatch: true};
+    } else {
+      c.get('password_confirm').setErrors(null);
+    }
   }
 
 }
