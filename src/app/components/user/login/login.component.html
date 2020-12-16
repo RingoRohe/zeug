@@ -2,8 +2,8 @@
   <div class="wrapper section__login">
     <h2>Login</h2>
 
-    <div class="loginForm" [hidden]="success" *ngIf="!currentUser">
-      <div class="info">Want to create an Account? <a routerLink="/user/register">Go to our Sign Up Form.</a></div>
+    <div class="loginForm genericForm" [hidden]="success" *ngIf="!currentUser">
+      <div class="info">Want to create an Account? <a routerLink="/user/signup">Go to our Sign Up Form.</a></div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)">
         <label for="email">E-Mail</label>

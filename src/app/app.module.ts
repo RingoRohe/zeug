@@ -14,7 +14,7 @@ import { MenuPointComponent } from './components/shared/menu-point/menu-point.co
 import { NgPopupsModule } from 'ng-popups';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './components/user/register/register.component';
+import { SignupComponent } from './components/user/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
 import { VerificationComponent } from './components/user/verification/verification.component';
 
@@ -26,7 +26,7 @@ import { VerificationComponent } from './components/user/verification/verificati
     LoginComponent,
     VerificationComponent,
     DashboardComponent,
-    RegisterComponent,
+    SignupComponent,
     InfoComponent,
     MenuPointComponent,
     ProfileComponent

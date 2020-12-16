@@ -48,9 +48,4 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  resendVerificationEmail() {
-    console.log('resending...');
-    this.userService.sendVerification();
-  }
-
 }

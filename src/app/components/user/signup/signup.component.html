@@ -1,0 +1,35 @@
+<section class="single-block">
+  <div class="wrapper section__signup">
+    <h2>Sign Up</h2>
+
+    <div class="signupForm genericForm" [hidden]="success" *ngIf="!currentUser">
+      <div class="info">Already have an Account? <a routerLink="/user/login">Go to Login Page.</a></div>
+
+      <form [formGroup]="signupForm" (ngSubmit)="onLoginFormSubmit(signupForm.value)">
+        <label for="username">Name</label>
+        <input type="text" formControlName="username" id="username" placeholder="John Doe"
+          [ngClass]="{'error': username.invalid && username.touched}">
+        <p class="error message" *ngIf="username.invalid && username.touched">Your Name has to be at least 3 Digits long.</p>
+
+        <label for="email">E-Mail</label>
+        <input type="text" formControlName="email" id="email" placeholder="you@uboot.com"
+          [ngClass]="{'error': email.invalid && email.touched}">
+        <p class="error message" *ngIf="email.invalid && email.touched">This is not a propper E-Mail Adress.</p>
+
+        <label for="password">Password</label>
+        <input type="password" formControlName="password" id="password" placeholder="secureandobscure"
+          [ngClass]="{'error': password.invalid && password.touched}">
+        <p class="error message" *ngIf="password.invalid && password.touched">Try harder!</p>
+
+        <label for="password_confirm">repeat</label>
+        <input type="password" formControlName="password_confirm" id="password_confirm" placeholder="secureandobscure"
+          [ngClass]="{'error': password_confirm.invalid && password_confirm.touched}">
+
+
+        <button type="submit" [disabled]="signupForm.invalid">sign up</button>
+      </form>
+
+      <div *ngIf="loading" class="loading"><span>loading...</span></div>
+    </div>
+  </div>
+</section>

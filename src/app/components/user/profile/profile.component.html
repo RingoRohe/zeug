@@ -6,12 +6,11 @@
     </div>
 
     <div *ngIf="!currentUser.emailVerification">
-      <p>You have not verified your Account yet.</p>
-      <p>We sent you an E-Mail with a Verification Link. Please check your Inbox.</p>
-      <p>If you can't find our E-Mail (even in your Spam Folder), no Problem.</p>
-      <button (click)="resendVerificationEmail()">Resend Verification E-Mail</button>
+      <p>You have not verified your Account yet.<a [routerLink]="['/user/verify']">Go to the Verification Page</a> to do so.
+      </p>
     </div>
   </div>
+
 
   <div *ngIf="!currentUser" class="wrapper section__login">
     <h2>Profile</h2>

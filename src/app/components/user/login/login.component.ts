@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../../../models/User';
@@ -72,11 +72,6 @@ export class LoginComponent implements OnInit {
           this.loading = false;
         }
       );
-  }
-
-  resendVerificationEmail() {
-    console.log('resending...');
-    this.userService.sendVerification();
   }
 
 }
