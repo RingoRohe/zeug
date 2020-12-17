@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(formData.email, formData.password)
       .then(
         (success) => {
-          this.loginForm.reset();
           this.success = true;
           this.error = null;
           console.log(success);
@@ -61,7 +60,6 @@ export class LoginComponent implements OnInit {
           }
         },
         (error) => {
-          this.loginForm.reset();
           this.error = error;
           this.success = false;
           console.log(error);
@@ -69,6 +67,7 @@ export class LoginComponent implements OnInit {
       )
       .finally(
         () => {
+          this.loginForm.reset();
           this.loading = false;
         }
       );

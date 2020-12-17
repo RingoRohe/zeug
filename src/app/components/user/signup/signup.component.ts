@@ -12,9 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 export class SignupComponent implements OnInit {
   currentUser: User;
   signupForm: FormGroup;
-  success: boolean;
-  error: boolean;
-  loading: boolean;
+  success: boolean = false;
+  error: string = null;
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,8 +52,22 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  onLoginFormSubmit() {
+  onSignupFormSubmit(formData) {
     this.loading = true;
+    this.userService.createUser(formData.email, formData.password, formData.username)
+      .then(
+        success => {
+          this.success = true;
+          this.error = null;
+      },
+        error => {
+          this.success = false;
+          this.error = error;
+      })
+      .finally(() => {
+        this.signupForm.reset();
+        this.loading = false;
+      });
   }
 
   passwordConfirming(c: AbstractControl): { password_missmatch: boolean } {

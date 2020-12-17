@@ -2,10 +2,15 @@
   <div class="wrapper section__signup">
     <h2>Sign Up</h2>
 
+    <div class="error" *ngIf="error">
+      <p>An Error occured.</p>
+      <pre>{{error}}</pre>
+    </div>
+
     <div class="signupForm genericForm" [hidden]="success" *ngIf="!currentUser">
       <div class="info">Already have an Account? <a routerLink="/user/login">Go to Login Page.</a></div>
 
-      <form [formGroup]="signupForm" (ngSubmit)="onLoginFormSubmit(signupForm.value)">
+      <form [formGroup]="signupForm" (ngSubmit)="onSignupFormSubmit(signupForm.value)">
         <label for="username">Name</label>
         <input type="text" formControlName="username" id="username" placeholder="John Doe"
           [ngClass]="{'error': username.invalid && username.touched}">
@@ -35,5 +40,17 @@
 
       <div *ngIf="loading" class="loading"><span>loading...</span></div>
     </div>
+
+    <div class="loggedInMessage" *ngIf="currentUser && !success">
+      <p>You cannot create an Account while you are logged in, right?</p>
+    </div>
+
+    <div class="successMessage" *ngIf="success">
+      <p>Welcome {{ currentUser.name}}.</p>
+      <p>You have successfully signed up for Zeug.</p>
+      <p>We have send you an E-Mail to verify your Account. Just click the Link in it and you are done.</p>
+      <p>If you dont get an E-Mail, you can resend it on our <a [routerLink]="['/user/verify']">Verification Page</a></p>
+    </div>
+
   </div>
 </section>
