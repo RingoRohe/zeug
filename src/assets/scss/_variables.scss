@@ -1,1 +1,3 @@
-$baseShadow: 0 0 5px var(--color-black);
+@import './colors';
+
+$baseShadow: 0 0 5px $black;

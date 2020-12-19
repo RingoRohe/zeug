@@ -1,9 +1,26 @@
-body {
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows:repeat(3, auto);
-    grid-template-areas:
-        "header"
-        "main"
-        "footer";
+@import '../assets/scss/colors';
+
+.container {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows:repeat(3, auto);
+  grid-template-areas:
+    "menu header"
+    "menu main"
+    "menu footer";
+
+  .header {
+    grid-area: header;
+    position: sticky;
+    top: 0;
+  }
+
+  .mainmenu {
+    grid-area: menu;
+  }
+
+  .page {
+    grid-area: main;
+    background-color: $mid;
+  }
 }

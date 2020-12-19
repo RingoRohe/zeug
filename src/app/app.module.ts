@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupComponent } from './components/user/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
 import { VerificationComponent } from './components/user/verification/verification.component';
+import { MainmenuComponent } from './components/mainmenu/mainmenu.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { VerificationComponent } from './components/user/verification/verificati
     SignupComponent,
     InfoComponent,
     MenuPointComponent,
-    ProfileComponent
+    ProfileComponent,
+    MainmenuComponent
   ],
   imports: [
     AppRoutingModule,

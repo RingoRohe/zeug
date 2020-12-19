@@ -1,16 +1,5 @@
 <header>
   <h1 class="app-title">My Zeug</h1>
-  <nav class="main-menu">
-    <ul>
-      <li *ngFor="let menuPoint of menuPoints">
-        <app-menu-point
-          [to]="menuPoint.target"
-          [classes]="menuPoint.classes"
-          [text]="menuPoint.text">
-        </app-menu-point>
-      </li>
-    </ul>
-  </nav>
   <section class="profile">
     <ul>
       <li *ngIf="!currentUser"><button (click)="onLoginButtonClicked()">login</button></li>

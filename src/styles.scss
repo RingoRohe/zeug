@@ -17,7 +17,7 @@ html {
 }
 
 body {
-    background-color: var(--color-background);
+    background-color: $mid;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     line-height: 1.3;
@@ -39,16 +39,16 @@ p {
 }
 
 a {
-    color: var(--color-primary);
+    color: $highlight;
     text-decoration: none;
     border-radius: 3px;
     padding: 2px 4px;
     cursor: pointer;
 
     &:hover {
-        color: var(--color-white);
-        background-color: var(--color-primary-shade);
+        color: $white;
+        background-color: lighten($highlight, 20);
     }
 }
 
-@import './assets/scss/shared';
+@import './assets/scss/global';

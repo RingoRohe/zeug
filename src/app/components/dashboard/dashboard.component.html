@@ -1,1 +1,14 @@
-<p>dashboard works!</p>
+<section class="dashboard">
+  <article class="card">
+    <h2 class="headline">Welcome</h2>
+    <p>dashboard works!</p>
+  </article>
+
+  <article class="card" *ngFor="let item of items">
+    <h2 class="headline">{{ item['title'] }}</h2>
+  </article>
+
+  <button (click)="onCreateButtonClicked()">Create Item</button>
+
+</section>
+

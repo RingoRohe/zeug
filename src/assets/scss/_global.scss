@@ -1,0 +1,181 @@
+@import './colors';
+
+.single-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin: 3em auto;
+}
+
+.genericForm {
+  position: relative;
+
+  .info {
+    margin: 1em 0;
+    color: $mid;
+  }
+
+  form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: .5em;
+
+    label {
+      display: inline;
+      vertical-align: baseline;
+      padding: .5em 0;
+    }
+
+    .error {
+      color: $danger;
+    }
+
+    .message {
+      grid-column: 1/3;
+      font-size: .8em;
+    }
+
+    button[type=submit] {
+      grid-column: 1/3;
+    }
+  }
+
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: transparentize(#FFF, .2);
+
+    span {
+      color: $dark;
+    }
+  }
+}
+
+.hidden {
+    display: none;
+}
+
+.card {
+    position: relative;
+    overflow: hidden;
+    background-color: $white;
+    padding: 1rem;
+    box-shadow: 0 0 5px $black;
+
+    &.nopadding {
+        padding: 0;
+    }
+
+    h2 {
+        font-size: 1rem;
+        font-weight: bold;
+        color: $light;
+        margin: 0.5rem 0;
+    }
+
+    p {
+        padding: 0.5rem 0;
+    }
+
+    .card_icon {
+        position: absolute;
+        // transform: rotate(25deg);
+        top: -0.3rem;
+        right: -0.3rem;
+        color: transparentize($highlight, 0.5);
+    }
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        font-size: 7em;
+        opacity: .1;
+        color: $highlight;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    &.dark {
+        background-color: $dark;
+        color: $white;
+    }
+}
+
+.menuPoint {
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 1rem !important;
+    min-width: 6rem;
+    text-decoration: none;
+    border-radius: 0;
+
+    .icon {
+        color: $highlight;
+        font-size: 2rem;
+    }
+
+    .text {
+        margin-top: .5rem;
+        text-align: center;
+        color: $white;
+    }
+
+    &:hover, &:focus, &.active {
+        background: $mid;
+        color: $white;
+    }
+}
+
+button, .button {
+    background-color: $dark;
+    color: $light !important;
+    border: none;
+    padding: .5em 1em;
+    cursor: pointer;
+
+    .default {
+        display: inline;
+    }
+
+    .hover {
+        display: none;
+    }
+
+    &:hover, &:focus {
+        color: $white !important;
+        background-color: $highlight;
+
+        .default {
+            display: none;
+        }
+
+        .hover {
+            display: inline;
+        }
+    }
+}
+
+.listsection_headline {
+    background-color: $light;
+    h3 {
+        font-size: 0.6rem !important;
+        text-align: right;
+    }
+}

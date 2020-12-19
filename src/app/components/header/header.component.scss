@@ -3,37 +3,26 @@
 
 header {
     grid-area: header;
-    background-color: var(--color-black);
+    background-color: $dark;
 
     display: grid;
     grid-template-columns: 1fr auto;
     grid-template-rows: repeat(2, auto);
     grid-template-areas:
-      "headline headline"
-      "nav profile";
+      "headline profile";
 
     .app-title {
       grid-area: headline;
       font-size: 1.2rem;
       margin: 0;
-      color: var(--color-light);
+      color: $light;
       font-weight: 900;
       text-transform: uppercase;
       text-align: center;
-      padding-top: 1em;
+      padding: 1em 0;
 
       @media (min-width: $breakpoints_m) {
           font-size: 1.8rem;
-      }
-    }
-
-    .main-menu {
-      grid-area: nav;
-
-      ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
       }
     }
 
