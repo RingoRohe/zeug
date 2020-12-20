@@ -2,32 +2,32 @@
 @import '../../../assets/scss/breakpoints';
 
 header {
-    grid-area: header;
-    background-color: $dark;
+  grid-area: header;
+  background-color: $dark;
 
-    display: grid;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: repeat(2, auto);
-    grid-template-areas:
-      "headline profile";
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas:
+    "headline profile";
 
-    .app-title {
-      grid-area: headline;
-      font-size: 1.2rem;
-      margin: 0;
-      color: $light;
-      font-weight: 900;
-      text-transform: uppercase;
-      text-align: center;
-      padding: 1em 0;
+  .app-title {
+    grid-area: headline;
+    font-size: 1.2rem;
+    margin: 0;
+    color: $light;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-align: left;
+    padding: .5em;
 
-      @media (min-width: $breakpoints_m) {
-          font-size: 1.8rem;
-      }
+    @media (min-width: $breakpoints_m) {
+        font-size: 1.8rem;
     }
+  }
 
-    .profile {
-      grid-area: profile;
-      padding: 1em;
-    }
+  .profile {
+    grid-area: profile;
+    padding: 1em;
+  }
 }

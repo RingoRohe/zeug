@@ -1,5 +1,5 @@
 <section class="single-block">
-  <div *ngIf="currentUser" class="wrapper section__login">
+  <div *ngIf="currentUser" class="wrapper section__login card">
     <h2>Hello {{ currentUser.name}}</h2>
     <div *ngIf="currentUser.emailVerification">
       <p>At the Moment you can only <a (click)="deleteUser()">delete yourself</a>. More to come.</p>
@@ -12,7 +12,7 @@
   </div>
 
 
-  <div *ngIf="!currentUser" class="wrapper section__login">
+  <div *ngIf="!currentUser" class="wrapper section__login card">
     <h2>Profile</h2>
     <p><a [routerLink]="['/user/login']" [queryParams]="{backlink:path}">Please Login first</a> to view your Profile.</p>
   </div>
