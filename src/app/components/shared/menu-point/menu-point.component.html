@@ -1,4 +1,4 @@
-<a routerLink="{{to}}" class="menu-point">
+<a routerLink="{{to}}" class="menu-point" [ngClass]="{'active': isActive}">
   <span class="{{classes}}"></span>
   <span class="text">{{text}}</span>
 </a>

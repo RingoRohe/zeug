@@ -5,7 +5,7 @@
   grid-template-columns: auto 1fr;
   grid-template-rows:repeat(3, auto);
   grid-template-areas:
-    "menu header"
+    "header header"
     "menu main"
     "menu footer";
 

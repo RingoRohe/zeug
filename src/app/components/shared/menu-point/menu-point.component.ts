@@ -9,6 +9,7 @@ export class MenuPointComponent implements OnInit {
   @Input() to: string = '/';
   @Input() classes: string = '';
   @Input() text: string = 'Link';
+  @Input() isActive: boolean = false;
 
   constructor() { }
 

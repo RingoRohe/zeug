@@ -1,7 +1,12 @@
 <nav class="main-menu">
   <ul>
     <li *ngFor="let menuPoint of menuPoints">
-      <app-menu-point [to]="menuPoint.target" [classes]="menuPoint.classes" [text]="menuPoint.text">
+      <app-menu-point
+        [to]="menuPoint.target"
+        [classes]="menuPoint.classes"
+        [text]="menuPoint.text"
+        [isActive]="menuPoint.isActive"
+      >
       </app-menu-point>
     </li>
   </ul>

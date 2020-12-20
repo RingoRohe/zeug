@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NgPopupsService } from 'ng-popups';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/User';
