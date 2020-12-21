@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { InfoComponent } from './components/info/info.component';
-import { LoginComponent } from './components/user/login/login.component';
-import { ProfileComponent } from './components/user/profile/profile.component';
-import { SignupComponent } from './components/user/signup/signup.component';
-import { VerificationComponent } from './components/user/verification/verification.component';
+import { LoginComponent, ProfileComponent, SignupComponent, VerificationComponent } from './components/user';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },

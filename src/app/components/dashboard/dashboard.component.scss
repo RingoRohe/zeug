@@ -1,9 +1,15 @@
 @import '../../../assets/scss/colors';
 
-section.dashboard {
-  margin: 1em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1rem;
-  grid-auto-rows: max-content;
+section {
+  &.dashboard {
+    margin: 1em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+    grid-auto-rows: max-content;
+  }
+
+  &.info {
+    margin: 1em;
+  }
 }

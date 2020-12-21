@@ -1,10 +1,14 @@
-<section class="dashboard">
+<section *ngIf="!currentUser" class="info">
   <article class="card">
     <h2 class="headline">Welcome</h2>
     <p>dashboard works!</p>
   </article>
+</section>
 
-  <article class="card" *ngFor="let item of items">
+<section *ngIf="currentUser" class="dashboard">
+
+  <article class="card" *ngFor="let item of primaryItems">
+    <span *ngIf="item.type" class="icon {{item.type['icon']}}"></span>
     <h2 class="headline">{{ item['title'] }}</h2>
   </article>
 
