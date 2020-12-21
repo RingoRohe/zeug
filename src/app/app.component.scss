@@ -2,12 +2,13 @@
 
 .container {
   display: grid;
+  min-height: 100vh;
   grid-template-columns: auto 1fr;
-  grid-template-rows:repeat(3, auto);
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
     "header header"
     "menu main"
-    "menu footer";
+    "footer footer";
 
   .header {
     grid-area: header;
@@ -17,10 +18,18 @@
 
   .mainmenu {
     grid-area: menu;
+    background-color: $dark;
   }
 
   .page {
     grid-area: main;
     background-color: $mid;
+  }
+
+  .footer {
+    grid-area: footer;
+    padding: 1em;
+    background-color: $dark;
+    color: $light;
   }
 }

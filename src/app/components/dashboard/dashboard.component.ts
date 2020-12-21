@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/services/api.service';
+import { TypesService } from 'src/app/services/types.service';
+import { StoragesService } from 'src/app/services/storages.service';
+import { ItemsService } from 'src/app/services/items.service';
 
 import { ZeugItem } from '../../models/ZeugItem';
+import { ZeugType } from 'src/app/models/ZeugType';
+import { ZeugStorage } from 'src/app/models/ZeugStorage';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,20 +13,36 @@ import { ZeugItem } from '../../models/ZeugItem';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  types: ZeugType[] = [];
+  storages: ZeugStorage[] = [];
   items: ZeugItem[] = [];
 
-  constructor(private api: ApiService) { }
+  constructor(
+    private typesService: TypesService,
+    private storagesService: StoragesService,
+    private itemsService: ItemsService
+  ) { }
 
   ngOnInit(): void {
-    this.api.listItems().then(response => {
-      Array.from(response['documents']).forEach((document: Object) => {
-        this.items.push(ZeugItem.fromAppwriteDocument(new ZeugItem, document));
-      });
+    this.typesService.typesChanged.subscribe(response => {
+      this.types = response;
+    });
+    this.storagesService.storagesChanged.subscribe(response => {
+      this.storages = response;
+    });
+    this.itemsService.itemsChanged.subscribe(response => {
+      this.items = response;
     });
   }
 
   onCreateButtonClicked() {
-    this.api.createItem();
+    let item = new ZeugItem();
+    item.title = "Trek Crossrip Comp";
+    item.manufacturer = "Trek";
+    item.model = "Crossrip Comp";
+    item.type = this.types[0];
+    item.isPrimary = true;
+    this.itemsService.createItem(item);
   }
 
 }

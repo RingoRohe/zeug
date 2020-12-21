@@ -2,17 +2,17 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import * as Appwrite from "appwrite";
-
-const collections = {
-  items: '5fdb8f66670c3',
-  types: '5fde58876b842',
-  storages: '5fde59d27d3cb'
-}
+import { ZeugItem } from '../models/ZeugItem';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
+  collections = {
+    items: '5fdb8f66670c3',
+    types: '5fde58876b842',
+    storages: '5fde59d27d3cb'
+    }
   appwrite: Appwrite
 
   constructor(private user: UserService) {
@@ -22,10 +22,10 @@ export class ApiService {
       .setProject(environment.API_PROJECT_ID);
   }
 
-  createItem() {
+  createDocument(collection: string, item: Object) {
     let promise = this.appwrite.database.createDocument(
-      collections.items,
-      {title: 'Ringos zweites Fahrrad'},
+      collection,
+      item,
       [`user:${this.user.currentUser.$id}`],
       [`user:${this.user.currentUser.$id}`],
       '',
@@ -33,16 +33,12 @@ export class ApiService {
       ''
     );
 
-    promise.then(function (response) {
-      console.log(response);
-    }, function (error) {
-      console.log(error);
-    });
+    return promise;
   }
 
-  listItems() {
+  listDocuments(collection: string) {
     let promise = this.appwrite.database.listDocuments(
-      collections.items,
+      collection,
       null,
       0,
       0,
@@ -58,7 +54,7 @@ export class ApiService {
   }
 
   getDocument() {
-    let promise = this.appwrite.database.getDocument(collections.items, '[DOCUMENT_ID]');
+    let promise = this.appwrite.database.getDocument(this.collections.items, '[DOCUMENT_ID]');
 
     promise.then(function (response) {
       console.log(response); // Success
