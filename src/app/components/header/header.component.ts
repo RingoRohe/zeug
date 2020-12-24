@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   currentUser: User;
+  avatarUrl:string = '';
 
   constructor(
     private userService: UserService,
@@ -20,6 +21,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.userService.userHasChanged.subscribe((data) => {
       this.currentUser = data;
+      this.avatarUrl = this.userService.avatarUrl;
     });
   }
 

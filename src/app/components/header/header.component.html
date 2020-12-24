@@ -1,7 +1,8 @@
 <header>
   <h1 class="app-title">My Zeug</h1>
   <section class="profile">
-    <ul>
+    <img *ngIf="currentUser && avatarUrl" [src]="avatarUrl" class="profile-image" />
+    <ul class="usermenu">
       <li *ngIf="!currentUser"><button (click)="onLoginButtonClicked()">login</button></li>
       <li *ngIf="currentUser"><button (click)="onLogoutButtonClicked()">logout</button></li>
     </ul>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
-import * as Appwrite from "appwrite";
+import * as Appwrite from 'appwrite';
 import { ZeugItem } from '../models/ZeugItem';
 
 @Injectable({
@@ -27,28 +27,14 @@ export class ApiService {
       collection,
       item,
       [`user:${this.user.currentUser.$id}`],
-      [`user:${this.user.currentUser.$id}`],
-      '',
-      '',
-      ''
+      [`user:${this.user.currentUser.$id}`]
     );
 
     return promise;
   }
 
   listDocuments(collection: string) {
-    let promise = this.appwrite.database.listDocuments(
-      collection,
-      null,
-      0,
-      0,
-      '',
-      '',
-      '',
-      '',
-      0,
-      0
-    );
+    let promise = this.appwrite.database.listDocuments(collection);
 
     return promise;
   }

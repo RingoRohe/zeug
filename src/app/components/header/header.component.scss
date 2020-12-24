@@ -28,6 +28,33 @@ header {
 
   .profile {
     grid-area: profile;
-    padding: 1em;
+    margin: 1em;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+
+    .profile-image {
+      width: 80px;
+    }
+
+    .usermenu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      transition: all 200ms;
+      transform: translateY(100%);
+
+      button {
+        width: 100%;
+      }
+    }
+
+    &:hover {
+      .usermenu {
+        transform: translateY(0);
+      }
+    }
   }
 }

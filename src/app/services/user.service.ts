@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
 import * as Appwrite from "appwrite";
+import MD5 from 'crypto-js/md5';
 
 import { User } from '../models/User';
 
@@ -12,6 +13,7 @@ export class UserService {
   appwrite: Appwrite
   currentUser: User;
   userHasChanged: Subject<User> = new Subject<User>();
+  avatarUrl: string = '';
 
   constructor() {
     this.appwrite = new Appwrite();
@@ -129,6 +131,7 @@ export class UserService {
     promise.then(
       (response: User) => {
         this.currentUser = response;
+        this.getAvatar();
         this.updateSubscribers();
       },
       (error) => {
@@ -136,5 +139,13 @@ export class UserService {
       }
     );
     return promise;
+  }
+
+  getAvatar = () => {
+    let initials = this.appwrite.avatars.getInitials();
+    const hash = MD5(this.currentUser.email.trim().toLowerCase());
+    const url = 'https://www.gravatar.com/avatar/' + hash + '?s=200';
+    console.log(this.currentUser.email, hash, url, initials);
+    this.avatarUrl = url;
   }
 }
