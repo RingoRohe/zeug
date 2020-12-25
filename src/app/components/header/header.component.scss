@@ -32,6 +32,7 @@ header {
     position: relative;
     cursor: pointer;
     overflow: hidden;
+    min-width: 80px;
 
     .profile-image {
       width: 80px;
@@ -44,10 +45,15 @@ header {
       bottom: 0;
       width: 100%;
       transition: all 200ms;
-      transform: translateY(100%);
 
       button {
         width: 100%;
+      }
+    }
+
+    &.logged-in {
+      .usermenu {
+        transform: translateY(100%);
       }
     }
 

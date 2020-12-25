@@ -4,7 +4,7 @@
 
     <div class="error" *ngIf="error">
       <p>An Error occured.</p>
-      <pre>{{error}}</pre>
+      <pre>{{error['message']}}</pre>
     </div>
 
     <div class="loginForm genericForm" [hidden]="success" *ngIf="!currentUser">

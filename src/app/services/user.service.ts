@@ -103,6 +103,8 @@ export class UserService {
     promise.then(
       () => {
         this.getCurrentUser();
+      }, (error) => {
+        console.error(error);
       }
     );
     return promise;
@@ -142,10 +144,10 @@ export class UserService {
   }
 
   getAvatar = () => {
-    let initials = this.appwrite.avatars.getInitials();
+    // let initials = this.appwrite.avatars.getInitials();
     const hash = MD5(this.currentUser.email.trim().toLowerCase());
-    const url = 'https://www.gravatar.com/avatar/' + hash + '?s=200';
-    console.log(this.currentUser.email, hash, url, initials);
+    const url = 'https://www.gravatar.com/avatar/' + hash + '?s=80&d=mp';
+    // console.log(this.currentUser.email, hash, url, initials);
     this.avatarUrl = url;
   }
 }

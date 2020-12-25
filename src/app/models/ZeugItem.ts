@@ -12,14 +12,4 @@ export class ZeugItem extends AppwriteObject {
   model: string;
   storage: ZeugStorage;
   isAttachedTo: ZeugItem;
-  children: ZeugItem[];
-
-  asOrdinaryObject() {
-    let obj = { ...this };
-    delete obj.$collection;
-    delete obj.$id;
-    delete obj.$permissions;
-    delete obj.children;
-    return obj;
-  }
 }

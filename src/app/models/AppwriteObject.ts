@@ -9,4 +9,12 @@ export class AppwriteObject {
     Object.assign(object, document);
     return object;
   }
+
+  asOrdinaryObject() {
+    let obj = { ...this };
+    delete obj.$collection;
+    delete obj.$id;
+    delete obj.$permissions;
+    return obj;
+  }
 }

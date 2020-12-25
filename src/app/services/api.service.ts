@@ -27,7 +27,10 @@ export class ApiService {
       collection,
       item,
       [`user:${this.user.currentUser.$id}`],
-      [`user:${this.user.currentUser.$id}`]
+      [`user:${this.user.currentUser.$id}`],
+      '',
+      '',
+      ''
     );
 
     return promise;
