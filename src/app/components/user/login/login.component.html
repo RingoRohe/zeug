@@ -7,7 +7,7 @@
       <pre>{{error['message']}}</pre>
     </div>
 
-    <div class="loginForm genericForm" [hidden]="success" *ngIf="!currentUser">
+    <div class="loginForm genericForm" *ngIf="!currentUser">
       <div class="info">Want to create an Account? <a routerLink="/user/signup">Go to our Sign Up Form.</a></div>
 
       <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit(loginForm.value)">

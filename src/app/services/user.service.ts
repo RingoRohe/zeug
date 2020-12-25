@@ -50,6 +50,7 @@ export class UserService {
 
   sendVerification = () => {
     console.log('api', 'sendVerification');
+    // TODO: make URL variable
     const promise = this.appwrite.account.createVerification('http://localhost:4200/user/verify');
     promise.then(
       (response) => {

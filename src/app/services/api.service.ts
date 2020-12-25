@@ -42,8 +42,8 @@ export class ApiService {
     return promise;
   }
 
-  getDocument() {
-    let promise = this.appwrite.database.getDocument(this.collections.items, '[DOCUMENT_ID]');
+  getDocument(documentId: string) {
+    let promise = this.appwrite.database.getDocument(this.collections.items, documentId);
 
     promise.then(function (response) {
       console.log(response); // Success

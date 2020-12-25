@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
 
       // first get all items to display on dashboard
       this.items.forEach(item => {
-        if (item.isPrimary) {
+        if (item.isPrimary && !item.storage) {
           this.combinedItems.push(CombinedItem.fromZeugItem(item));
         }
       });
@@ -76,7 +76,6 @@ export class DashboardComponent implements OnInit {
           found.children.push(item);
         }
       });
-      console.log(this.combinedItems);
     }
   }
 
