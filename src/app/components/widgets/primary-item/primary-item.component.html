@@ -1,0 +1,5 @@
+  <span *ngIf="item.type" class="icon {{item.type['icon']}}"></span>
+  <h2 class="headline">{{ item.title }}</h2>
+  <ul>
+    <li *ngFor="let child of item.children">{{ child.title }}</li>
+  </ul>

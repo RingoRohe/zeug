@@ -18,6 +18,10 @@ import { SignupComponent } from './components/user/signup/signup.component';
 import { ToastrModule } from 'ngx-toastr';
 import { VerificationComponent } from './components/user/verification/verification.component';
 import { MainmenuComponent } from './components/mainmenu/mainmenu.component';
+import { ItemsComponent } from './components/items/items/items.component';
+import { CreateItemComponent } from './components/items/create-item/create-item.component';
+import { EditItemComponent } from './components/items/edit-item/edit-item.component';
+import { PrimaryItemComponent } from './components/widgets/primary-item/primary-item.component';
 
 
 @NgModule({
@@ -31,7 +35,11 @@ import { MainmenuComponent } from './components/mainmenu/mainmenu.component';
     InfoComponent,
     MenuPointComponent,
     ProfileComponent,
-    MainmenuComponent
+    MainmenuComponent,
+    ItemsComponent,
+    CreateItemComponent,
+    EditItemComponent,
+    PrimaryItemComponent
   ],
   imports: [
     AppRoutingModule,

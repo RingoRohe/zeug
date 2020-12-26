@@ -18,9 +18,9 @@ export class MainmenuComponent implements OnInit {
       isActive: false
     },
     {
-      target: '/info',
-      classes: 'icon fas fa-info',
-      text: 'Info',
+      target: '/items',
+      classes: 'icon fas fa-cubes',
+      text: 'Items',
       isActive: false
     },
     {
