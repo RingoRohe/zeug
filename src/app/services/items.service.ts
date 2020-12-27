@@ -51,6 +51,7 @@ export class ItemsService {
 
     promise.then(response => {
       this.items.push(ZeugItem.fromAppwriteDocument(new ZeugItem, response));
+      this.updateSubscribers();
     }, error => {
       console.error('Item not saved', error);
     });

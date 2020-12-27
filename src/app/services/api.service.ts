@@ -5,15 +5,15 @@ import * as Appwrite from 'appwrite';
 import { ZeugItem } from '../models/ZeugItem';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   collections = {
-    items: '5fdb8f66670c3',
-    types: '5fde58876b842',
-    storages: '5fde59d27d3cb'
-    }
-  appwrite: Appwrite
+    items: '5fe8ebe9c06a1',
+    types: '5fe8ebfb955e3',
+    storages: '5fe8ec1b9a88c',
+  };
+  appwrite: Appwrite;
 
   constructor(private user: UserService) {
     this.appwrite = new Appwrite();
@@ -43,12 +43,18 @@ export class ApiService {
   }
 
   getDocument(documentId: string) {
-    let promise = this.appwrite.database.getDocument(this.collections.items, documentId);
+    let promise = this.appwrite.database.getDocument(
+      this.collections.items,
+      documentId
+    );
 
-    promise.then(function (response) {
-      console.log(response); // Success
-    }, function (error) {
-      console.log(error); // Failure
-    });
+    promise.then(
+      function (response) {
+        console.log(response); // Success
+      },
+      function (error) {
+        console.log(error); // Failure
+      }
+    );
   }
 }

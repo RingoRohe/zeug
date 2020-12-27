@@ -81,11 +81,12 @@ export class DashboardComponent implements OnInit {
 
   onCreateButtonClicked() {
     let item = new ZeugItem();
-    item.title = "Schnürsenkel (blau)";
-    item.manufacturer = "Schlaufe & Co KG";
-    item.type = this.types[1];
-    item.isPrimary = false;
-    item.isAttachedTo = this.combinedItems[3];
+    item.title = "Bombtrack Hook Ext";
+    item.manufacturer = "Bombtrack";
+    item.model = "Hook Ext"
+    item.type = this.types[0];
+    item.isPrimary = true;
+    // item.isAttachedTo = this.combinedItems[3];
     this.itemsService.createItem(item);
   }
 

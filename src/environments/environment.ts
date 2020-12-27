@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   API_ENDPOINT: 'http://localhost:1234/v1',
-  API_PROJECT_ID: '5fcbe9f1500d4'
+  API_PROJECT_ID: '5fe8ea702d4a3',
 };
 
 /*
