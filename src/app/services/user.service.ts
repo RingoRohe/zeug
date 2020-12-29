@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Subject } from 'rxjs';
-import * as Appwrite from "appwrite";
+import Appwrite from "appwrite";
 import MD5 from 'crypto-js/md5';
 
 import { User } from '../models/User';

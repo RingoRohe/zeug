@@ -29,7 +29,7 @@ export class StoragesService {
   }
 
   getStorages() {
-    let promise = this.api.listDocuments(this.api.collections.items);
+    let promise = this.api.listDocuments(this.api.collectionId('storages'));
 
     promise.then(response => {
       this.storages = [];
@@ -45,7 +45,7 @@ export class StoragesService {
   }
 
   createItem(item: ZeugStorage) {
-    let promise = this.api.createDocument(this.api.collections.items, item);
+    let promise = this.api.createDocument(this.api.collectionId('storages'), item);
 
     promise.then(response => {
       this.storages.push(ZeugStorage.fromAppwriteDocument(new ZeugStorage, response));

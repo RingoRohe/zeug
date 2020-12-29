@@ -33,7 +33,7 @@ export class TypesService {
   }
 
   getTypes() {
-    let promise = this.api.listDocuments(this.api.collections.types);
+    let promise = this.api.listDocuments(this.api.collectionId('types'));
 
     promise.then(response => {
       this.types = [];
@@ -45,7 +45,7 @@ export class TypesService {
   }
 
   createType(type: ZeugType) {
-    let promise = this.api.createDocument(this.api.collections.types ,type);
+    let promise = this.api.createDocument(this.api.collectionId('types') ,type);
 
     promise.then(response => {
       console.log(response);

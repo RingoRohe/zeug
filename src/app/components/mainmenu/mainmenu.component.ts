@@ -40,7 +40,6 @@ export class MainmenuComponent implements OnInit {
       if (event.url !== undefined && event.url !== this.currentRoute) {
         this.currentRoute = event.url;
         this.menuPoints = [];
-        console.log(event.url);
 
         this.menuPointsTemplate.forEach(mp => {
           mp.isActive = mp.target == this.currentRoute;

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
-import * as Appwrite from 'appwrite';
-import { ZeugItem } from '../models/ZeugItem';
+import Appwrite from 'appwrite';
+import * as collectionsData from '../../assets/collections.json';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,11 @@ export class ApiService {
     this.appwrite
       .setEndpoint(environment.API_ENDPOINT)
       .setProject(environment.API_PROJECT_ID);
+  }
+
+  collectionId(name: string): string {
+    let collection = collectionsData['default'].find(item => item.name === name);
+    return collection.id;
   }
 
   createDocument(collection: string, item: Object) {
@@ -44,7 +49,7 @@ export class ApiService {
 
   getDocument(documentId: string) {
     let promise = this.appwrite.database.getDocument(
-      this.collections.items,
+      this.collectionId('items'),
       documentId
     );
 

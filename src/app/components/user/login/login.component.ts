@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         (success) => {
           this.success = true;
           this.error = null;
-          console.log(success);
+
           if (this.backlink) {
             this.router.navigate([this.backlink]);
           }

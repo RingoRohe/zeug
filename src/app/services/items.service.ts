@@ -33,7 +33,7 @@ export class ItemsService {
   }
 
   getItems() {
-    let promise = this.api.listDocuments(this.api.collections.items);
+    let promise = this.api.listDocuments(this.api.collectionId('items'));
 
     promise.then((response) => {
       this.items = [];
@@ -47,7 +47,10 @@ export class ItemsService {
   }
 
   createItem(item: ZeugItem) {
-    let promise = this.api.createDocument(this.api.collections.items, item.asOrdinaryObject());
+    let promise = this.api.createDocument(
+      this.api.collectionId('items'),
+      item.asOrdinaryObject()
+    );
 
     promise.then(response => {
       this.items.push(ZeugItem.fromAppwriteDocument(new ZeugItem, response));
