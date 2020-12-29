@@ -22,6 +22,7 @@ import { ItemsComponent } from './components/items/items/items.component';
 import { CreateItemComponent } from './components/items/create-item/create-item.component';
 import { EditItemComponent } from './components/items/edit-item/edit-item.component';
 import { PrimaryItemComponent } from './components/widgets/primary-item/primary-item.component';
+import { ItemFormComponent } from './components/items/shared/item-form/item-form.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { PrimaryItemComponent } from './components/widgets/primary-item/primary-
     ItemsComponent,
     CreateItemComponent,
     EditItemComponent,
-    PrimaryItemComponent
+    PrimaryItemComponent,
+    ItemFormComponent
   ],
   imports: [
     AppRoutingModule,

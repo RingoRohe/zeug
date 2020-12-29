@@ -1,0 +1,21 @@
+<div class="itemForm genericForm">
+  <div class="info">Want to create an Account? <a routerLink="/user/signup">Go to our Sign Up Form.</a></div>
+
+  <form [formGroup]="itemForm" (ngSubmit)="onItemFormSubmit(itemForm.value)">
+    <label for="name">E-Mail</label>
+    <input
+      type="text"
+      formControlName="name"
+      id="name"
+      placeholder="My awesome Item"
+      [ngClass]="{'error': controls['name'].invalid && controls['name'].touched}"
+    >
+    <p class="error message" *ngIf="controls['name'].invalid && controls['name'].touched">
+      You have to give your Item a name.
+    </p>
+
+    <button type="submit" [disabled]="itemForm.invalid">login</button>
+  </form>
+
+  <div *ngIf="loading" class="loading"><span>loading...</span></div>
+</div>
