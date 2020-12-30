@@ -39,6 +39,12 @@
     button[type=submit] {
       grid-column: 1/3;
     }
+
+    select {
+      &.error {
+        box-shadow: 0 0 5px $danger;
+      }
+    }
   }
 
   .loading {
@@ -122,68 +128,72 @@
 }
 
 .menuPoint {
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 1rem !important;
-    min-width: 6rem;
-    text-decoration: none;
-    border-radius: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1rem !important;
+  min-width: 6rem;
+  text-decoration: none;
+  border-radius: 0;
 
-    .icon {
-        color: $highlight;
-        font-size: 2rem;
-    }
+  .icon {
+    color: $highlight;
+    font-size: 2rem;
+  }
 
-    .text {
-        margin-top: .5rem;
-        text-align: center;
-        color: $white;
-    }
+  .text {
+    margin-top: .5rem;
+    text-align: center;
+    color: $white;
+  }
 
-    &:hover, &:focus, &.active {
-        background: $mid;
-        color: $white;
-    }
+  &:hover, &:focus, &.active {
+    background: $mid;
+    color: $white;
+  }
 }
 
 button, .button {
-    background-color: $dark;
-    color: $light !important;
-    border: none;
-    padding: .5em 1em;
-    cursor: pointer;
+  background-color: $dark;
+  color: $light !important;
+  border: none;
+  padding: .5em 1em;
+  cursor: pointer;
+
+  .default {
+    display: inline;
+  }
+
+  .hover {
+    display: none;
+  }
+
+  &:hover, &:focus {
+    color: $white !important;
+    background-color: $highlight;
 
     .default {
-        display: inline;
+      display: none;
     }
 
     .hover {
-        display: none;
+      display: inline;
     }
+  }
 
-    &:hover, &:focus {
-        color: $white !important;
-        background-color: $highlight;
-
-        .default {
-            display: none;
-        }
-
-        .hover {
-            display: inline;
-        }
-    }
+  &:disabled {
+    background-color: $mid;
+  }
 }
 
 .listsection_headline {
-    background-color: $light;
-    h3 {
-        font-size: 0.6rem !important;
-        text-align: right;
-    }
+  background-color: $light;
+  h3 {
+    font-size: 0.6rem !important;
+    text-align: right;
+  }
 }

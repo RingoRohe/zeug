@@ -23,6 +23,7 @@ import { CreateItemComponent } from './components/items/create-item/create-item.
 import { EditItemComponent } from './components/items/edit-item/edit-item.component';
 import { PrimaryItemComponent } from './components/widgets/primary-item/primary-item.component';
 import { ItemFormComponent } from './components/items/shared/item-form/item-form.component';
+import { NgxSmartModalModule } from 'ngx-smart-modal';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ItemFormComponent } from './components/items/shared/item-form/item-form
     BrowserModule,
     NgPopupsModule.forRoot(),
     ReactiveFormsModule,
-    ToastrModule.forRoot({positionClass: 'toast-top-center', progressBar: true})
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', progressBar: true }),
+    NgxSmartModalModule.forRoot()
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
