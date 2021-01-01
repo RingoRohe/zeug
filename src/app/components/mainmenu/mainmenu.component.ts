@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Menupoint } from '../../models/Menupoint';
 
 @Component({
@@ -9,44 +8,29 @@ import { Menupoint } from '../../models/Menupoint';
 })
 export class MainmenuComponent implements OnInit {
   currentRoute: string = null;
-  menuPoints: Menupoint[] = [];
-  menuPointsTemplate: Menupoint[] = [
+  menuPoints: Menupoint[] = [
     {
       target: '/',
       classes: 'icon fas fa-columns',
-      text: 'Dashboard',
-      isActive: false
+      text: 'Dashboard'
     },
     {
       target: '/items',
       classes: 'icon fas fa-cubes',
-      text: 'Items',
-      isActive: false
+      text: 'Items'
     },
     {
       target: '/user/profile',
       classes: 'icon fas fa-user',
-      text: 'Profile',
-      isActive: false
+      text: 'Profile'
     }
   ];
 
-  constructor(private router: Router) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    this.router.events.subscribe((event: any) => {
-      if (event.url !== undefined && event.url !== this.currentRoute) {
-        this.currentRoute = event.url;
-        this.menuPoints = [];
-
-        this.menuPointsTemplate.forEach(mp => {
-          mp.isActive = mp.target == this.currentRoute;
-          this.menuPoints.push(mp);
-        });
-      }
-    });
   }
 
 }

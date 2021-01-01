@@ -15,24 +15,31 @@ export class ItemFormComponent implements OnInit {
   error: string = null;
   loading: boolean = false;
 
+  defaultForm = {
+    title: ['', [Validators.required]],
+    type: [null, [Validators.required]],
+    isPrimary: [false],
+    description: [''],
+    firstDayOfUse: [moment().format('YYYY-MM-DD')],
+    manufacturer: [''],
+    model: [''],
+    isAttachedTo: [null],
+  };
+
   @Input() onSubmit: Function;
   @Input() types: ZeugType[];
   @Input() items: ZeugItem[];
+  @Input() item: ZeugItem;
 
   constructor(private formBuilder: FormBuilder) {
-    this.itemForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      type: [null, [Validators.required]],
-      isPrimary: [false],
-      description: [''],
-      firstDayOfUse: [moment().format('YYYY-MM-DD')],
-      manufacturer: [''],
-      model: [''],
-      isAttachedTo: [null]
-    });
+    this.createForm();
   }
 
-  ngOnInit(): void { }
+  createForm() {
+    this.itemForm = this.formBuilder.group(this.defaultForm);
+  }
+
+  ngOnInit(): void {}
 
   get controls() {
     return this.itemForm.controls;
@@ -46,12 +53,14 @@ export class ItemFormComponent implements OnInit {
 
     // replace type ID with type object
     if (formData.type) {
-      formData.type = this.types.find(item => item.$id === formData.type);
+      formData.type = this.types.find((item) => item.$id === formData.type);
     }
 
     // replace attachedTo ID with actual object
     if (formData.isAttachedTo) {
-      formData.isAttachedTo = this.items.find(item => item.$id === formData.isAttachedTo);
+      formData.isAttachedTo = this.items.find(
+        (item) => item.$id === formData.isAttachedTo
+      );
     }
 
     this.onSubmit(formData);
@@ -62,5 +71,6 @@ export class ItemFormComponent implements OnInit {
     this.error = null;
     this.loading = false;
     this.itemForm.reset();
+    this.createForm();
   }
 }

@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment';
 import { UserService } from './user.service';
 import Appwrite from 'appwrite';
 import * as collectionsData from '../../assets/collections.json';
+import { AppwriteObject } from '../models/AppwriteObject';
 
 @Injectable({
   providedIn: 'root',
@@ -47,7 +48,8 @@ export class ApiService {
     return promise;
   }
 
-  getDocument(documentId: string) {
+  // TODO: this is not dumb enough, only works for items atm
+  getDocument(documentId: string): Promise<Object> {
     let promise = this.appwrite.database.getDocument(
       this.collectionId('items'),
       documentId
@@ -61,5 +63,25 @@ export class ApiService {
         console.log(error); // Failure
       }
     );
+
+    return promise;
+  }
+
+  removeDocument(document: AppwriteObject) {
+    let promise = this.appwrite.database.deleteDocument(
+      document.$collection,
+      document.$id
+    );
+
+    promise.then(
+      response => {
+        console.log(response); // Success
+      },
+      error => {
+        console.log(error); // Failure
+      }
+    );
+
+    return promise
   }
 }

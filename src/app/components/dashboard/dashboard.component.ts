@@ -4,6 +4,7 @@ import { StoragesService } from 'src/app/services/storages.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgPopupsService } from 'ng-popups';
 
 import { ZeugItem } from '../../models/ZeugItem';
 import { CombinedItem } from '../../models/CombinedItem';
@@ -34,7 +35,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     private storagesService: StoragesService,
     private itemsService: ItemsService,
     private modalService: NgxSmartModalService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private popups: NgPopupsService
   ) {}
 
   ngOnInit(): void {
@@ -83,32 +85,52 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       // then walk through all items again and find the attached ones
       this.items.forEach((item) => {
         if (item.isAttachedTo) {
+          // TODO: only works with 2 layers atm.
           let found = this.combinedItems.find(
             (element) => element.$id === item.isAttachedTo.$id
           );
-          found.children.push(item);
+          if (found) {
+            found.children.push(item);
+          }
         }
       });
     }
   }
 
   onCreateButtonClicked() {
-    // let item = new ZeugItem();
-    // item.title = "Bombtrack Hook Ext";
-    // item.manufacturer = "Bombtrack";
-    // item.model = "Hook Ext"
-    // item.type = this.types[0];
-    // item.isPrimary = true;
-    // // item.isAttachedTo = this.combinedItems[3];
-    // this.itemsService.createItem(item);
-
     this.modal.open();
+  }
+
+  onDeleteButtonClicked = (item: CombinedItem) => {
+    this.popups
+      .confirm('Do You really want to delete '+item.title+'?', {
+        title: 'Think twice!',
+        okButtonText: 'Sure!',
+        cancelButtonText: 'No',
+        color: '#F00',
+      })
+      .subscribe((res) => {
+        if (res) {
+          this.deleteItem(item);
+        }
+      });
+  }
+
+  deleteItem(item: ZeugItem) {
+    let promise = this.itemsService.deleteItem(item);
+
+    promise.then(
+      (result) => {
+        this.toast.success(item.title + ' deleted.');
+      },
+      (error) => {
+        this.toast.error('Error when trying to delete ' + item.title);
+      }
+    );
   }
 
   onModalCreateFormSubmit = (data) => {
     let newItem = ZeugItem.fromObject(data);
-    newItem.type = this.types[0];
-    console.log('new Item', newItem);
     let promise = this.itemsService.createItem(newItem);
 
     promise.then(
@@ -121,4 +143,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       }
     )
   };
+
+  modalCloseFinished() {
+    this.formComponent.reset();
+  }
 }

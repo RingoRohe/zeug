@@ -1,5 +1,21 @@
-  <span *ngIf="item.type" class="icon {{item.type['icon']}}"></span>
+<span *ngIf="item.type" class="icon {{item.type['icon']}}"></span>
+<header>
   <h2 class="headline">{{ item.title }}</h2>
+</header>
+<div class="content">
   <ul>
     <li *ngFor="let child of item.children">{{ child.title }}</li>
   </ul>
+</div>
+<footer class="nopadding">
+  <ul class="actions">
+    <li>
+      <button class="fas fa-trash" (click)="onDeleteItemButtonClicked()"></button>
+    </li>
+    <li>
+      <button class="fas fa-pen" [routerLink]="['items/edit/', item.$id]">
+        <span></span>
+      </button>
+    </li>
+  </ul>
+</footer>

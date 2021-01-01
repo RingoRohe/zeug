@@ -62,4 +62,19 @@ export class ItemsService {
     return promise;
   }
 
+  deleteItem(item: ZeugItem): Promise<Object> {
+    let promise = this.api.removeDocument(item);
+
+    promise.then(
+      response => {
+        this.getItems();
+      },
+      (error) => {
+        console.error('Item not deleted', error);
+      }
+    );
+
+    return promise;
+  }
+
 }
