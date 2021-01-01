@@ -1,20 +1,72 @@
 <div class="itemForm genericForm">
-  <div class="info">Want to create an Account? <a routerLink="/user/signup">Go to our Sign Up Form.</a></div>
 
   <form [formGroup]="itemForm" (ngSubmit)="onItemFormSubmit(itemForm.value)">
-    <label for="name">E-Mail</label>
+    <!-- Name -->
+    <label for="title">Title:</label>
     <input
       type="text"
-      formControlName="name"
-      id="name"
+      formControlName="title"
+      id="title"
       placeholder="My awesome Item"
-      [ngClass]="{'error': controls['name'].invalid && controls['name'].touched}"
+      [ngClass]="{'error': controls['title'].invalid && controls['title'].touched}"
     >
-    <p class="error message" *ngIf="controls['name'].invalid && controls['name'].touched">
-      You have to give your Item a name.
+    <p class="error message" *ngIf="controls['title'].invalid && controls['title'].touched">
+      Your Item needs a Title.
     </p>
 
-    <button type="submit" [disabled]="itemForm.invalid">login</button>
+    <!-- Type -->
+    <label for="type">Type:</label>
+    <select
+      type="text"
+      formControlName="type"
+      id="type"
+      placeholder="Type of Item"
+      [ngClass]="{'error': controls['type'].invalid && controls['type'].touched}"
+    >
+      <option *ngFor="let type of types" [value]="type.$id">{{type.title}}</option>
+    </select>
+
+    <!-- isPrimary -->
+    <label for="isPrimary">is primary:</label>
+    <input type="checkbox"
+      formControlName="isPrimary"
+      id="isPrimary"
+    >
+
+    <!-- Description -->
+    <label for="description">Description:</label>
+    <textarea formControlName="description" id="description">
+    </textarea>
+
+    <!-- First Day of use -->
+    <label for="firstDayOfUse">First Day of use:</label>
+    <input
+      type="date"
+      formControlName="firstDayOfUse"
+      id="firstDayOfUse" />
+
+    <!-- Manufacturer -->
+    <label for="manufacturer">Manufacturer:</label>
+      <input type="text" formControlName="manufacturer" id="manufacturer"
+      placeholder="Fujimens"
+      >
+
+    <!-- Model -->
+    <label for="model">Model:</label>
+      <input type="text" formControlName="model" id="model"
+      placeholder="Rocket 2000"
+    >
+
+    <!-- is attached to -->
+    <label for="isAttachedTo">attached to:</label>
+    <select isAttachedTo="text"
+      formControlName="isAttachedTo"
+      id="isAttachedTo"
+    >
+      <option *ngFor="let item of items" [value]="item.$id">{{item.title}}</option>
+    </select>
+
+    <button type="submit" [disabled]="itemForm.invalid">create</button>
   </form>
 
   <div *ngIf="loading" class="loading"><span>loading...</span></div>

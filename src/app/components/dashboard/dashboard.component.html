@@ -7,9 +7,21 @@
 
 <section *ngIf="currentUser" class="dashboard">
 
-  <app-primary-item class="card" *ngFor="let item of combinedItems" [item]="item"></app-primary-item>
+  <app-primary-item class="card" *ngFor="let item of combinedItems" [item]="item" [onDelete]="onDeleteButtonClicked"></app-primary-item>
 
   <button (click)="onCreateButtonClicked()">Create Item</button>
 
 </section>
 
+<ngx-smart-modal
+  #createItemFormModal
+  [dismissable]="false"
+  identifier="createItemFormModal"
+  (onCloseFinished)="modalCloseFinished()">
+  <h2>Create a new Item</h2>
+  <app-item-form
+    [types]="types"
+    [items]="items"
+    [onSubmit]="onModalCreateFormSubmit"
+  ></app-item-form>
+</ngx-smart-modal>

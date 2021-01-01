@@ -12,4 +12,11 @@ export class ZeugItem extends AppwriteObject {
   model: string;
   storage: ZeugStorage;
   isAttachedTo: ZeugItem;
+
+  static fromObject(object: Object): ZeugItem {
+    let zeugObject: ZeugItem = new ZeugItem();
+    Object.assign(zeugObject, object);
+
+    return zeugObject;
+  }
 }

@@ -39,6 +39,12 @@
     button[type=submit] {
       grid-column: 1/3;
     }
+
+    select {
+      &.error {
+        box-shadow: 0 0 5px $danger;
+      }
+    }
   }
 
   .loading {
@@ -67,8 +73,11 @@
   position: relative;
   overflow: hidden;
   background-color: $white;
-  padding: 1rem;
   box-shadow: 0 0 5px $black;
+
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto 1fr auto;
 
   &.col2 {
     grid-column: span 2;
@@ -77,28 +86,50 @@
     grid-row: span 2;
   }
 
-  &.nopadding {
-    padding: 0;
-  }
-
-  h2 {
-    font-size: 1rem;
-    font-weight: bold;
-    color: $mid;
-    margin: 0.5rem 0;
-  }
-
-  p {
-    padding: 0.5rem 0;
-  }
-
   .icon {
     position: absolute;
     // transform: rotate(25deg);
-    top: -0.3rem;
-    right: -0.3rem;
+    top: -0.3em;
+    right: -0.3em;
     color: transparentize($highlight, 0.7);
     font-size: 3em;
+  }
+
+  header {
+    padding: 1em 1em 0 1em;
+
+    &.nopadding {
+      padding: 0;
+    }
+
+    h2 {
+      font-size: 1em;
+      font-weight: bold;
+      color: $mid;
+      margin: 0.5em 0 0;
+    }
+  }
+
+  .content {
+    padding: 1em;
+
+    &.nopadding {
+      padding: 0;
+    }
+
+    p {
+      padding: 0.5em 0;
+    }
+
+  }
+
+  footer {
+    padding: 1em;
+
+    &.nopadding {
+      padding: 0;
+    }
+
   }
 
   .background {
@@ -119,71 +150,90 @@
     background-color: $dark;
     color: $white;
   }
+
+  .actions {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+    li {
+      flex-grow: 1;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
 }
 
 .menuPoint {
-    height: 100%;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    cursor: pointer;
-    padding: 1rem !important;
-    min-width: 6rem;
-    text-decoration: none;
-    border-radius: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1em !important;
+  min-width: 6em;
+  text-decoration: none;
+  border-radius: 0;
 
-    .icon {
-        color: $highlight;
-        font-size: 2rem;
-    }
+  .icon {
+    color: $highlight;
+    font-size: 2em;
+  }
 
-    .text {
-        margin-top: .5rem;
-        text-align: center;
-        color: $white;
-    }
+  .text {
+    margin-top: .5em;
+    text-align: center;
+    color: $white;
+  }
 
-    &:hover, &:focus, &.active {
-        background: $mid;
-        color: $white;
-    }
+  &:hover, &:focus, &.active {
+    background: $mid;
+    color: $white;
+  }
 }
 
 button, .button {
-    background-color: $dark;
-    color: $light !important;
-    border: none;
-    padding: .5em 1em;
-    cursor: pointer;
+  background-color: $dark;
+  color: $light !important;
+  border: none;
+  padding: .5em 1em;
+  cursor: pointer;
+
+  .default {
+    display: inline;
+  }
+
+  .hover {
+    display: none;
+  }
+
+  &:hover, &:focus {
+    color: $white !important;
+    background-color: $highlight;
 
     .default {
-        display: inline;
+      display: none;
     }
 
     .hover {
-        display: none;
+      display: inline;
     }
+  }
 
-    &:hover, &:focus {
-        color: $white !important;
-        background-color: $highlight;
-
-        .default {
-            display: none;
-        }
-
-        .hover {
-            display: inline;
-        }
-    }
+  &:disabled {
+    background-color: $mid;
+  }
 }
 
 .listsection_headline {
-    background-color: $light;
-    h3 {
-        font-size: 0.6rem !important;
-        text-align: right;
-    }
+  background-color: $light;
+  h3 {
+    font-size: 0.6em !important;
+    text-align: right;
+  }
 }

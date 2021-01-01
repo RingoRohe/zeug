@@ -4,14 +4,17 @@ import { CombinedItem } from 'src/app/models/CombinedItem';
 @Component({
   selector: 'app-primary-item',
   templateUrl: './primary-item.component.html',
-  styleUrls: ['./primary-item.component.scss']
+  styleUrls: ['./primary-item.component.scss'],
 })
 export class PrimaryItemComponent implements OnInit {
   @Input() item: CombinedItem = null;
+  @Input() onDelete: Function;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  onDeleteItemButtonClicked() {
+    this.onDelete(this.item);
   }
-
 }
