@@ -7,7 +7,7 @@
 
 <section *ngIf="currentUser" class="dashboard">
 
-  <app-primary-item class="card" *ngFor="let item of combinedItems" [item]="item" [onDelete]="onDeleteButtonClicked"></app-primary-item>
+  <app-primary-item class="card primary-item" *ngFor="let item of combinedItems" [item]="item" [onDelete]="onDeleteButtonClicked"></app-primary-item>
 
   <button (click)="onCreateButtonClicked()">Create Item</button>
 

@@ -94,8 +94,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.combinedItems.push(combinedItem);
         }
       });
-
-      console.log('combined Items', this.combinedItems);
     }
   }
 

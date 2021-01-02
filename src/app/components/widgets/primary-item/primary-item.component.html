@@ -4,7 +4,9 @@
 </header>
 <div class="content">
   <ul>
-    <li *ngFor="let child of item.children">{{ child.title }}</li>
+    <li *ngFor="let child of item.children">
+      <app-secondary-item class="secondary-item first" [item]="child"></app-secondary-item>
+    </li>
   </ul>
 </div>
 <footer class="nopadding">

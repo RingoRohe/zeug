@@ -1,0 +1,34 @@
+@import '../../../../../assets/scss/colors';
+
+:host {
+
+  li {
+    /* matches every sub-item */
+    display: block;
+    margin-top:.2em;
+
+    .arrow {
+      margin-right: .3em;
+      color: $mid;
+    }
+
+    /* matches sub-sub-items */
+    ul {
+      padding-left: 1em;
+    }
+  }
+  // &>ul {
+  //   padding: .5em 0 0 0;
+  //   margin: .1em 0;
+  //   border-top: 1px solid $light;
+
+
+  //   &>li {
+  //     margin-left: .5em;
+
+  //     &:first {
+  //       margin-left: 0;
+  //     }
+  //   }
+  // }
+}

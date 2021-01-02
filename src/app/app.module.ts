@@ -24,6 +24,7 @@ import { EditItemComponent } from './components/items/edit-item/edit-item.compon
 import { PrimaryItemComponent } from './components/widgets/primary-item/primary-item.component';
 import { ItemFormComponent } from './components/items/shared/item-form/item-form.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { SecondaryItemComponent } from './components/widgets/primary-item/secondary-item/secondary-item.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { NgxSmartModalModule } from 'ngx-smart-modal';
     CreateItemComponent,
     EditItemComponent,
     PrimaryItemComponent,
-    ItemFormComponent
+    ItemFormComponent,
+    SecondaryItemComponent
   ],
   imports: [
     AppRoutingModule,
