@@ -172,4 +172,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   editModalCloseFinished() {
     this.editFormComponent.reset();
   }
+
+  onStoreButtonClicked = (item: CombinedItem) => {
+    this.toast.info(item.title);
+  }
 }

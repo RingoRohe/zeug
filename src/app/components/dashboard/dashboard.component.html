@@ -16,6 +16,7 @@
     *ngFor="let item of combinedItems"
     [item]="item"
     [onDelete]="onDeleteButtonClicked"
+    [onStore]="onStoreButtonClicked"
     [onEdit]="onEditButtonClicked"></app-primary-item>
 
   <button (click)="onCreateButtonClicked()">Create Item</button>

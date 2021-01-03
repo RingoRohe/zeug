@@ -10,6 +10,7 @@ import { CombinedItem } from 'src/app/models/CombinedItem';
 export class PrimaryItemComponent implements OnInit {
   @Input() item: CombinedItem = null;
   @Input() onEdit: Function;
+  @Input() onStore: Function;
   @Input() onDelete: Function;
 
   constructor(private router: Router) {}
@@ -22,6 +23,10 @@ export class PrimaryItemComponent implements OnInit {
     } else {
       this.router.navigate(['items/edit/', this.item.$id]);
     }
+  }
+
+  onStoreItemButtonClicked() {
+    this.onStore(this.item);
   }
 
   onDeleteItemButtonClicked() {

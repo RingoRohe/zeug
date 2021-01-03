@@ -12,12 +12,13 @@
 <footer class="nopadding">
   <ul class="actions">
     <li>
-      <button class="fas fa-trash" (click)="onDeleteItemButtonClicked()"></button>
+      <button class="fas fa-trash" (click)="onDeleteItemButtonClicked()" title="delete"></button>
     </li>
     <li>
-      <button class="fas fa-pen" (click)="onEditItemButtonClicked()">
-        <span></span>
-      </button>
+      <button class="fas fa-warehouse" (click)="onStoreItemButtonClicked()" title="store"></button>
+    </li>
+    <li>
+      <button class="fas fa-pen" (click)="onEditItemButtonClicked()" title="edit"></button>
     </li>
   </ul>
 </footer>
