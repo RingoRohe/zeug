@@ -14,18 +14,21 @@ export class ItemFormComponent implements OnInit {
   success: boolean = false;
   error: string = null;
   loading: boolean = false;
+  _items: ZeugItem[] = [];
+  itemsToShow: ZeugItem[] = [];
 
   defaultForm: Object = {};
 
   @Input() onSubmit: Function;
   @Input() types: ZeugType[];
-  @Input() items: ZeugItem[];
   @Input() item: ZeugItem = new ZeugItem();
   @Input() buttonText: string = 'submit';
+  @Input() set items(value: ZeugItem[]) {
+    this._items = value;
+    this.filterItemsToShow();
+  };
 
   constructor(private formBuilder: FormBuilder) {
-    this.setDefaultForm();
-    this.createForm();
   }
 
   setDefaultForm() {
@@ -51,7 +54,18 @@ export class ItemFormComponent implements OnInit {
     this.itemForm = this.formBuilder.group(this.defaultForm);
   }
 
+  filterItemsToShow = () => {
+    if (!this.item) {
+      this.itemsToShow = this._items;
+      return;
+    }
+    this.itemsToShow = this._items.filter(item => item.$id != this.item.$id);
+  }
+
   ngOnInit(): void {
+    this.filterItemsToShow();
+    this.setDefaultForm();
+    this.createForm();
   }
 
   get controls() {
@@ -71,7 +85,7 @@ export class ItemFormComponent implements OnInit {
 
     // replace attachedTo ID with actual object
     if (formData.isAttachedTo) {
-      formData.isAttachedTo = this.items.find(
+      formData.isAttachedTo = this._items.find(
         (item) => item.$id === formData.isAttachedTo
       );
     }
@@ -95,6 +109,7 @@ export class ItemFormComponent implements OnInit {
 
   update(item: ZeugItem) {
     this.item = item;
+    this.filterItemsToShow();
     this.setDefaultForm();
     this.createForm();
   }
