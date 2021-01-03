@@ -46,6 +46,12 @@ export class ItemsService {
     });
   }
 
+  getItem(documentId: string) {
+    let promise = this.api.getDocument(this.api.collectionId('items'), documentId);
+
+    return promise;
+  }
+
   createItem(item: ZeugItem): Promise<Object> {
     let promise = this.api.createDocument(
       this.api.collectionId('items'),
@@ -58,6 +64,25 @@ export class ItemsService {
     }, error => {
       console.error('Item not saved', error);
     });
+
+    return promise;
+  }
+
+  updateItem(item: ZeugItem) {
+    let promise = this.api.updateDocument(
+      this.api.collectionId('items'),
+      item.$id,
+      item.asOrdinaryObject()
+    );
+
+    promise.then(
+      (response) => {
+        this.getItems();
+      },
+      (error) => {
+        console.error('Item not deleted', error);
+      }
+    );
 
     return promise;
   }

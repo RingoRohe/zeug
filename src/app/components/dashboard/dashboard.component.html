@@ -1,7 +1,11 @@
 <section *ngIf="!currentUser" class="info">
   <article class="card">
-    <h2 class="headline">Welcome</h2>
-    <p>dashboard works!</p>
+    <header>
+      <h2 class="headline">Welcome</h2>
+    </header>
+    <div class="content">
+      <p>dashboard works!</p>
+    </div>
   </article>
 </section>
 
@@ -23,5 +27,6 @@
     [types]="types"
     [items]="items"
     [onSubmit]="onModalCreateFormSubmit"
+    [buttonText]="'create Item'"
   ></app-item-form>
 </ngx-smart-modal>

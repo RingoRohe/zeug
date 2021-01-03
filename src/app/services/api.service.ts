@@ -24,64 +24,66 @@ export class ApiService {
   }
 
   collectionId(name: string): string {
-    let collection = collectionsData['default'].find(item => item.name === name);
+    let collection = collectionsData['default'].find(
+      (item) => item.name === name
+    );
     return collection.id;
   }
 
-  createDocument(collection: string, item: Object) {
-    let promise = this.appwrite.database.createDocument(
-      collection,
-      item,
-      [`user:${this.user.currentUser.$id}`],
-      [`user:${this.user.currentUser.$id}`],
-      '',
-      '',
-      ''
-    );
-
-    return promise;
-  }
-
-  listDocuments(collection: string) {
+  listDocuments(collection: string): Promise<Object> {
     let promise = this.appwrite.database.listDocuments(collection);
 
     return promise;
   }
 
-  // TODO: this is not dumb enough, only works for items atm
-  getDocument(documentId: string): Promise<Object> {
-    let promise = this.appwrite.database.getDocument(
-      this.collectionId('items'),
-      documentId
-    );
+  getDocument(collectionId: string, documentId: string): Promise<Object> {
+    let promise = this.appwrite.database.getDocument(collectionId, documentId);
 
-    promise.then(
-      function (response) {
-        console.log(response); // Success
-      },
-      function (error) {
-        console.log(error); // Failure
-      }
+    return promise;
+  }
+
+  createDocument(collectionId: string, item: Object): Promise<Object> {
+    let promise = this.appwrite.database.createDocument(
+      collectionId,
+      item,
+      [`user:${this.user.currentUser.$id}`],
+      [`user:${this.user.currentUser.$id}`]
     );
 
     return promise;
   }
 
-  removeDocument(document: AppwriteObject) {
+  updateDocument(
+    collectionId: string,
+    documentId: string,
+    object: Object
+  ): Promise<Object> {
+    let promise = this.appwrite.database.updateDocument(
+      collectionId,
+      documentId,
+      object,
+      [`user:${this.user.currentUser.$id}`],
+      [`user:${this.user.currentUser.$id}`]
+    );
+
+    return promise;
+  }
+
+  removeDocument(document: AppwriteObject): Promise<Object> {
     let promise = this.appwrite.database.deleteDocument(
       document.$collection,
       document.$id
     );
 
     promise.then(
-      response => {
+      (response) => {
         console.log(response); // Success
       },
-      error => {
+      (error) => {
         console.log(error); // Failure
       }
     );
 
-    return promise
+    return promise;
   }
 }
