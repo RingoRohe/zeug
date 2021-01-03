@@ -58,7 +58,6 @@ export class ItemFormComponent implements OnInit {
     return this.itemForm.controls;
   }
 
-  // TODO: give back a finished ZeugItem Object, not plain Formdata
   onItemFormSubmit(formData): void {
     this.loading = true;
 
@@ -77,7 +76,13 @@ export class ItemFormComponent implements OnInit {
       );
     }
 
-    this.onSubmit(formData);
+    if (!this.item) {
+      this.item = new ZeugItem();
+    }
+    Object.assign(this.item, formData);
+    this.item = ZeugItem.fromObject(this.item);
+
+    this.onSubmit(this.item);
   }
 
   reset() {

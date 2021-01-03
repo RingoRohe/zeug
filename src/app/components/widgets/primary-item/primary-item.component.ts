@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CombinedItem } from 'src/app/models/CombinedItem';
 
 @Component({
@@ -8,11 +9,20 @@ import { CombinedItem } from 'src/app/models/CombinedItem';
 })
 export class PrimaryItemComponent implements OnInit {
   @Input() item: CombinedItem = null;
+  @Input() onEdit: Function;
   @Input() onDelete: Function;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  onEditItemButtonClicked() {
+    if (this.onEdit) {
+      this.onEdit(this.item);
+    } else {
+      this.router.navigate(['items/edit/', this.item.$id]);
+    }
+  }
 
   onDeleteItemButtonClicked() {
     this.onDelete(this.item);

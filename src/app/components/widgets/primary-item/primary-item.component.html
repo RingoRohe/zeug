@@ -15,7 +15,7 @@
       <button class="fas fa-trash" (click)="onDeleteItemButtonClicked()"></button>
     </li>
     <li>
-      <button class="fas fa-pen" [routerLink]="['items/edit/', item.$id]">
+      <button class="fas fa-pen" (click)="onEditItemButtonClicked()">
         <span></span>
       </button>
     </li>

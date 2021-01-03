@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { TypesService } from 'src/app/services/types.service';
 import { StoragesService } from 'src/app/services/storages.service';
 import { ItemsService } from 'src/app/services/items.service';
-import { NgxSmartModalService } from 'ngx-smart-modal';
+import { NgxSmartModalComponent, NgxSmartModalService } from 'ngx-smart-modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgPopupsService } from 'ng-popups';
 
@@ -25,9 +25,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   storages: ZeugStorage[] = [];
   items: ZeugItem[] = [];
   combinedItems: CombinedItem[] = [];
-  modal: any;
+  createModal: NgxSmartModalComponent;
+  editModal: NgxSmartModalComponent;
 
-  @ViewChild(ItemFormComponent) formComponent: ItemFormComponent;
+  @ViewChild('createForm') createFormComponent: ItemFormComponent;
+  @ViewChild('editForm') editFormComponent: ItemFormComponent;
 
   constructor(
     private userService: UserService,
@@ -62,8 +64,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     });
     this.combineItems();
   }
+
   ngAfterViewInit(): void {
-    this.modal = this.modalService.get('createItemFormModal');
+    this.createModal = this.modalService.get('createItemFormModal');
+    this.editModal = this.modalService.get('editItemFormModal');
   }
 
   combineItems(): void {
@@ -76,14 +80,14 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.combinedItems = [];
 
       let findChildren = (item: CombinedItem) => {
-        this.items.map(child => {
+        this.items.map((child) => {
           if (child.isAttachedTo && child.isAttachedTo.$id === item.$id) {
             let combinedChild = CombinedItem.fromZeugItem(child);
             findChildren(combinedChild);
             item.children.push(combinedChild);
           }
         });
-      }
+      };
 
       // first get all items to display on dashboard
       this.items.forEach((item) => {
@@ -97,13 +101,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onCreateButtonClicked() {
-    this.modal.open();
-  }
-
   onDeleteButtonClicked = (item: CombinedItem) => {
     this.popups
-      .confirm('Do You really want to delete '+item.title+'?', {
+      .confirm('Do You really want to delete ' + item.title + '?', {
         title: 'Think twice!',
         okButtonText: 'Sure!',
         cancelButtonText: 'No',
@@ -114,7 +114,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
           this.deleteItem(item);
         }
       });
-  }
+  };
 
   deleteItem(item: ZeugItem) {
     let promise = this.itemsService.deleteItem(item);
@@ -129,22 +129,47 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
-  onModalCreateFormSubmit = (data) => {
-    let newItem = ZeugItem.fromObject(data);
-    let promise = this.itemsService.createItem(newItem);
+  onCreateButtonClicked() {
+    this.createModal.open();
+  }
+
+  onModalCreateFormSubmit = (item: ZeugItem) => {
+    let promise = this.itemsService.createItem(item);
 
     promise.then(
-      result => {
-        this.formComponent.reset();
-        this.modal.close();
-        this.toast.success('Item created.')
-      }, error => {
+      (result) => {
+        this.createModal.close();
+        this.toast.success('Item created.');
+      },
+      (error) => {
         this.toast.error('Whoops. Item not saved.');
       }
-    )
+    );
   };
 
-  modalCloseFinished() {
-    this.formComponent.reset();
+  createModalCloseFinished() {
+    this.createFormComponent.reset();
+  }
+
+  onEditButtonClicked = (item: CombinedItem) => {
+    this.editFormComponent.update(item.asZeugItem());
+    this.editModal.open();
+  };
+
+  onEditFormSubmit = (item: ZeugItem) => {
+    let promise = this.itemsService.updateItem(item);
+    promise.then(
+      (result) => {
+        this.editModal.close();
+        this.toast.success('Item updated.');
+      },
+      (error) => {
+        this.toast.error('Whoops. Item not updated.');
+      }
+    );
+  };
+
+  editModalCloseFinished() {
+    this.editFormComponent.reset();
   }
 }

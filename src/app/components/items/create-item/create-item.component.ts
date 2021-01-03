@@ -36,9 +36,8 @@ export class CreateItemComponent implements OnInit {
     });
   }
 
-  onCreateFormSubmit = (data) => {
-    let newItem = ZeugItem.fromObject(data);
-    let promise = this.itemsService.createItem(newItem);
+  onCreateFormSubmit = (item: ZeugItem) => {
+    let promise = this.itemsService.createItem(item);
 
     promise.then(
       (result) => {

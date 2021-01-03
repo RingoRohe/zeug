@@ -11,7 +11,12 @@
 
 <section *ngIf="currentUser" class="dashboard">
 
-  <app-primary-item class="card primary-item" *ngFor="let item of combinedItems" [item]="item" [onDelete]="onDeleteButtonClicked"></app-primary-item>
+  <app-primary-item
+    class="card primary-item"
+    *ngFor="let item of combinedItems"
+    [item]="item"
+    [onDelete]="onDeleteButtonClicked"
+    [onEdit]="onEditButtonClicked"></app-primary-item>
 
   <button (click)="onCreateButtonClicked()">Create Item</button>
 
@@ -21,12 +26,28 @@
   #createItemFormModal
   [dismissable]="false"
   identifier="createItemFormModal"
-  (onCloseFinished)="modalCloseFinished()">
+  (onCloseFinished)="createModalCloseFinished()">
   <h2>Create a new Item</h2>
   <app-item-form
+    #createForm
     [types]="types"
     [items]="items"
     [onSubmit]="onModalCreateFormSubmit"
     [buttonText]="'create Item'"
+  ></app-item-form>
+</ngx-smart-modal>
+
+<ngx-smart-modal
+  #editItemFormModal
+  [dismissable]="false"
+  identifier="editItemFormModal"
+  (onCloseFinished)="editModalCloseFinished()">
+  <h2>Edit Item</h2>
+  <app-item-form
+    #editForm
+    [items]="items"
+    [types]="types"
+    [onSubmit]="onEditFormSubmit"
+    [buttonText]="'save'"
   ></app-item-form>
 </ngx-smart-modal>

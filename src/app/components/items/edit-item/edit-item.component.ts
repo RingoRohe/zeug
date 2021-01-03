@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgPopupsService } from 'ng-popups';
 import { ToastrService } from 'ngx-toastr';
@@ -13,7 +13,7 @@ import { ItemFormComponent } from '../shared/item-form/item-form.component';
   templateUrl: './edit-item.component.html',
   styleUrls: ['./edit-item.component.scss'],
 })
-export class EditItemComponent implements OnInit {
+export class EditItemComponent implements OnInit, AfterViewInit {
   types: ZeugType[];
   items: ZeugItem[];
   item: ZeugItem;
@@ -29,20 +29,6 @@ export class EditItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe(data => {
-      let promise = this.itemsService.getItem(data.id);
-
-      promise.then(
-        result => {
-          this.item = ZeugItem.fromAppwriteDocument(new ZeugItem, result);
-          console.log('item loaded');
-          this.formComponent.update(this.item);
-        },
-        error => {
-          this.toast.error('Error loading Item');
-        }
-      )
-    });
     this.types = this.typesService.types;
     this.typesService.typesChanged.subscribe((response) => {
       this.types = response;
@@ -53,8 +39,26 @@ export class EditItemComponent implements OnInit {
     });
   }
 
-  onEditFormSubmit = (data) => {
-    Object.assign(this.item, data);
+  ngAfterViewInit() {
+    this.formComponent.loading = true;
+    this.route.params.subscribe((data) => {
+      let promise = this.itemsService.getItem(data.id);
+
+      promise.then(
+        (result) => {
+          this.item = ZeugItem.fromAppwriteDocument(new ZeugItem(), result);
+          this.formComponent.update(this.item);
+          this.formComponent.loading = false;
+        },
+        (error) => {
+          this.toast.error('Error loading Item');
+        }
+      );
+    });
+  }
+
+  onEditFormSubmit = (item: ZeugItem) => {
+    this.item = item;
     let promise = this.itemsService.updateItem(this.item);
 
     promise.then(

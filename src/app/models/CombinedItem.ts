@@ -8,4 +8,10 @@ export class CombinedItem extends ZeugItem {
     Object.assign(combinedItem, object);
     return combinedItem;
   };
+
+  asZeugItem(): ZeugItem {
+    let obj = { ...this };
+    delete obj.children;
+    return obj;
+  }
 }
