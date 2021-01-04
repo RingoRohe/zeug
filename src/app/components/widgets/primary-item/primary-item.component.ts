@@ -25,8 +25,8 @@ export class PrimaryItemComponent implements OnInit {
     }
   }
 
-  onStoreItemButtonClicked() {
-    this.onStore(this.item);
+  onStoreItemButtonClicked(event) {
+    this.onStore(this.item, event.target);
   }
 
   onDeleteItemButtonClicked() {

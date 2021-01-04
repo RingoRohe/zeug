@@ -15,7 +15,7 @@
       <button class="fas fa-trash" (click)="onDeleteItemButtonClicked()" title="delete"></button>
     </li>
     <li>
-      <button class="fas fa-warehouse" (click)="onStoreItemButtonClicked()" title="store"></button>
+      <button id="storage-button-{{item.$id}}" class="fas fa-warehouse" (click)="onStoreItemButtonClicked($event)" title="store"></button>
     </li>
     <li>
       <button class="fas fa-pen" (click)="onEditItemButtonClicked()" title="edit"></button>

@@ -61,20 +61,23 @@ export class ItemsComponent implements OnInit {
     ) {
       this.combinedItems = [];
 
+      let findChildren = (item: CombinedItem) => {
+        this.items.map((child) => {
+          if (child.isAttachedTo && child.isAttachedTo.$id === item.$id) {
+            let combinedChild = CombinedItem.fromZeugItem(child);
+            findChildren(combinedChild);
+            item.children.push(combinedChild);
+          }
+        });
+      };
+
       // first get all items to display on dashboard
       this.items.forEach((item) => {
         if (item.isPrimary && !item.storage) {
-          this.combinedItems.push(CombinedItem.fromZeugItem(item));
-        }
-      });
-
-      // then walk through all items again and find the attached ones
-      this.items.forEach((item) => {
-        if (item.isAttachedTo) {
-          let found = this.combinedItems.find(
-            (element) => element.$id === item.isAttachedTo.$id
-          );
-          found.children.push(item);
+          let combinedItem = CombinedItem.fromZeugItem(item);
+          // recursively find all children
+          findChildren(combinedItem);
+          this.combinedItems.push(combinedItem);
         }
       });
     }

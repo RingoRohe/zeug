@@ -13,3 +13,29 @@ section {
     margin: 1em;
   }
 }
+
+:host ::ng-deep {
+  .nsm-content {
+    padding: 0;
+  }
+
+  .nsm-dialog-btn-close {
+    top: 0;
+    right: 0;
+    background-color: $dark;
+    font-size: 1em;
+
+    &:hover {
+      background-color: $highlight;
+    }
+  }
+
+  .nsm-body {
+    display: flex;
+    flex-direction: column;
+
+    button {
+      font-size: 1.2em;
+    }
+  }
+}

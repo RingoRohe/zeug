@@ -27,9 +27,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   combinedItems: CombinedItem[] = [];
   createModal: NgxSmartModalComponent;
   editModal: NgxSmartModalComponent;
+  storageModal: NgxSmartModalComponent;
 
   @ViewChild('createForm') createFormComponent: ItemFormComponent;
   @ViewChild('editForm') editFormComponent: ItemFormComponent;
+  @ViewChild('storageSelector') storageSelector: NgxSmartModalComponent;
 
   constructor(
     private userService: UserService,
@@ -68,6 +70,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.createModal = this.modalService.get('createItemFormModal');
     this.editModal = this.modalService.get('editItemFormModal');
+    this.storageModal = this.modalService.get('storageSelector');
   }
 
   combineItems(): void {
@@ -173,7 +176,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.editFormComponent.reset();
   }
 
-  onStoreButtonClicked = (item: CombinedItem) => {
-    this.toast.info(item.title);
+  onStoreButtonClicked = (item: CombinedItem, target: EventTarget = null) => {
+    this.storageSelector.target = '#' + target['id'];
+    this.storageModal.open();
+  }
+
+  onStorageSelected = (storage: ZeugStorage) => {
+    this.popups.alert(storage.title);
+    this.storageModal.close();
   }
 }

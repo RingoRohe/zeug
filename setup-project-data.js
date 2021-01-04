@@ -73,7 +73,7 @@ let createTypesCollection = () => {
           "label": "Title",
           "key": "title",
           "type": "text",
-          "required": false,
+          "required": true,
           "array": false,
           "default": ""
         },
@@ -118,7 +118,7 @@ let createStoragesCollection = () => {
           "label": "Title",
           "key": "title",
           "type": "text",
-          "required": false,
+          "required": true,
           "array": false,
           "default": ""
         },

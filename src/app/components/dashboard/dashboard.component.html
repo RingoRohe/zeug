@@ -52,3 +52,9 @@
     [buttonText]="'save'"
   ></app-item-form>
 </ngx-smart-modal>
+
+<ngx-smart-modal
+  #storageSelector
+  identifier="storageSelector">
+  <button class="button" *ngFor="let storage of storages" (click)="onStorageSelected(storage)">{{storage.title}}</button>
+</ngx-smart-modal>
