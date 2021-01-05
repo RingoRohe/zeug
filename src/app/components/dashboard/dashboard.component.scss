@@ -15,27 +15,46 @@ section {
 }
 
 :host ::ng-deep {
-  .nsm-content {
-    padding: 0;
-  }
+  .storageSelector-modal {
+    .nsm-dialog-btn-close {
+      top: 0;
+      right: 0;
+      background-color: $dark;
+      font-size: 1em;
 
-  .nsm-dialog-btn-close {
-    top: 0;
-    right: 0;
-    background-color: $dark;
-    font-size: 1em;
-
-    &:hover {
-      background-color: $highlight;
+      &:hover {
+        background-color: $highlight;
+      }
     }
-  }
 
-  .nsm-body {
-    display: flex;
-    flex-direction: column;
+    .nsm-content {
+      padding: 0;
+      width: max-content;
 
-    button {
-      font-size: 1.2em;
+      .nsm-body {
+        display: flex;
+        flex-direction: column;
+
+        .headline {
+          padding: 0.5em;
+          margin: 0;
+          font-size: 1.2em;
+          background-color: $lighter;
+          border-bottom: 1px solid $light;
+        }
+
+        button.button {
+          font-size: 1em;
+          background-color: $lighter;
+          color: $black !important;
+          padding-left: 4em;
+          padding-right: 4em;
+
+          &:hover {
+            background-color: $highlight;
+          }
+        }
+      }
     }
   }
 }

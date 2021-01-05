@@ -178,11 +178,26 @@ export class DashboardComponent implements OnInit, AfterViewInit {
 
   onStoreButtonClicked = (item: CombinedItem, target: EventTarget = null) => {
     this.storageSelector.target = '#' + target['id'];
+    this.storageModal.setData({item: item}, true);
     this.storageModal.open();
   }
 
   onStorageSelected = (storage: ZeugStorage) => {
-    this.popups.alert(storage.title);
-    this.storageModal.close();
+    let modalData = this.storageModal.getData();
+    let item: CombinedItem = modalData.item;
+    this.popups.confirm(`Move ${item.title} to ${storage.title}?`).subscribe(res => {
+      if (res) {
+        this.storageModal.close();
+        let promise = this.itemsService.moveToStorage(item.asZeugItem(), storage);
+        promise.then(
+          result => {
+            this.toast.success(`${modalData.item.title} moved to ${storage.title}.`);
+          },
+          error => {
+            this.toast.error('Error while moving Item.');
+          }
+        )
+      }
+    });
   }
 }

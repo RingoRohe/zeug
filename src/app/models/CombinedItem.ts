@@ -12,6 +12,6 @@ export class CombinedItem extends ZeugItem {
   asZeugItem(): ZeugItem {
     let obj = { ...this };
     delete obj.children;
-    return obj;
+    return ZeugItem.fromObject(obj);
   }
 }

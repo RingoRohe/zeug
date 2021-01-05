@@ -88,6 +88,8 @@ export class ItemFormComponent implements OnInit {
       formData.isAttachedTo = this._items.find(
         (item) => item.$id === formData.isAttachedTo
       );
+    } else {
+      formData.isAttachedTo = false;
     }
 
     if (!this.item) {

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { ZeugItem } from '../models/ZeugItem';
+import { ZeugStorage } from '../models/ZeugStorage';
 import { ApiService } from './api.service';
 import { UserService } from './user.service';
 
@@ -98,6 +99,15 @@ export class ItemsService {
         console.error('Item not deleted', error);
       }
     );
+
+    return promise;
+  }
+
+  moveToStorage(item: ZeugItem, storage: ZeugStorage): Promise<Object> {
+    item.storage = storage;
+    item.isAttachedTo = null;
+
+    let promise = this.updateItem(item);
 
     return promise;
   }

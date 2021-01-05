@@ -63,6 +63,7 @@
       formControlName="isAttachedTo"
       id="isAttachedTo"
     >
+      <option [value]=""></option>
       <option *ngFor="let item of itemsToShow" [value]="item.$id">{{item.title}}</option>
     </select>
 

@@ -55,6 +55,8 @@
 
 <ngx-smart-modal
   #storageSelector
-  identifier="storageSelector">
+  identifier="storageSelector"
+  class="storageSelector-modal">
+  <h2 class="headline">move to...</h2>
   <button class="button" *ngFor="let storage of storages" (click)="onStorageSelected(storage)">{{storage.title}}</button>
 </ngx-smart-modal>
