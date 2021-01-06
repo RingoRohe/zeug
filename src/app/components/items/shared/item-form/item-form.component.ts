@@ -35,7 +35,7 @@ export class ItemFormComponent implements OnInit {
     this.defaultForm = {
       title: [this.item.title, [Validators.required]],
       type: [this.item.type ? this.item.type.$id : null, [Validators.required]],
-      isPrimary: [this.item.isPrimary],
+      showOnDashboard: [this.item.showOnDashboard],
       description: [this.item.description],
       firstDayOfUse: [
         this.item.firstDayOfUse

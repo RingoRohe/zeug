@@ -5,7 +5,7 @@ import { ZeugStorage } from './ZeugStorage';
 export class ZeugItem extends AppwriteObject {
   title: string;
   type: ZeugType;
-  isPrimary: boolean;
+  showOnDashboard: boolean;
   description: string;
   firstDayOfUse: number;
   manufacturer: string;

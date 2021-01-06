@@ -81,7 +81,7 @@ export class ItemsService {
         this.getItems();
       },
       (error) => {
-        console.error('Item not deleted', error);
+        console.error('Item not updated', error);
       }
     );
 

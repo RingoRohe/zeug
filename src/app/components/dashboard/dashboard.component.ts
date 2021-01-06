@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.items = this.itemsService.items;
     this.itemsService.itemsChanged.subscribe((response) => {
       this.items = response;
+      this.combinedItems = [];
       this.combineItems();
     });
     this.combineItems();
@@ -80,27 +81,8 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.storages.length &&
       this.types.length
     ) {
-      this.combinedItems = [];
-
-      let findChildren = (item: CombinedItem) => {
-        this.items.map((child) => {
-          if (child.isAttachedTo && child.isAttachedTo.$id === item.$id) {
-            let combinedChild = CombinedItem.fromZeugItem(child);
-            findChildren(combinedChild);
-            item.children.push(combinedChild);
-          }
-        });
-      };
-
-      // first get all items to display on dashboard
-      this.items.forEach((item) => {
-        if (item.isPrimary && !item.storage) {
-          let combinedItem = CombinedItem.fromZeugItem(item);
-          // recursively find all children
-          findChildren(combinedItem);
-          this.combinedItems.push(combinedItem);
-        }
-      });
+      this.combinedItems = CombinedItem.combineItems(this.items)
+        .filter(item => item.showOnDashboard && !item.storage);
     }
   }
 

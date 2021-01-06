@@ -192,15 +192,15 @@ let updateItemsCollection = (typesCollection, storagesCollection, itemsCollectio
         "label": "Type",
         "key": "type",
         "type": "document",
-        "required": false,
+        "required": true,
         "array": false,
         "list": [
           typesCollection.$id
         ]
       },
       {
-        "label": "Is primary",
-        "key": "isPrimary",
+        "label": "show on Dshboars",
+        "key": "showOnDashboard",
         "type": "boolean",
         "required": false,
         "array": false,

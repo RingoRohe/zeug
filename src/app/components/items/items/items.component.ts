@@ -73,7 +73,7 @@ export class ItemsComponent implements OnInit {
 
       // first get all items to display on dashboard
       this.items.forEach((item) => {
-        if (item.isPrimary && !item.storage) {
+        if (item.showOnDashboard && !item.storage) {
           let combinedItem = CombinedItem.fromZeugItem(item);
           // recursively find all children
           findChildren(combinedItem);

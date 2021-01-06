@@ -167,36 +167,6 @@
   }
 }
 
-.menuPoint {
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  cursor: pointer;
-  padding: 1em !important;
-  min-width: 6em;
-  text-decoration: none;
-  border-radius: 0;
-
-  .icon {
-    color: $highlight;
-    font-size: 2em;
-  }
-
-  .text {
-    margin-top: .5em;
-    text-align: center;
-    color: $white;
-  }
-
-  &:hover, &:focus, &.active {
-    background: $mid;
-    color: $white;
-  }
-}
-
 button, .button {
   background-color: $dark;
   color: $light !important;
@@ -227,13 +197,5 @@ button, .button {
 
   &:disabled {
     background-color: $mid;
-  }
-}
-
-.listsection_headline {
-  background-color: $light;
-  h3 {
-    font-size: 0.6em !important;
-    text-align: right;
   }
 }
