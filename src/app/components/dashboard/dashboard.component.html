@@ -11,13 +11,15 @@
 
 <section *ngIf="currentUser" class="dashboard">
 
-  <app-primary-item
-    class="card primary-item"
-    *ngFor="let item of combinedItems"
-    [item]="item"
-    [onDelete]="onDeleteButtonClicked"
-    [onStore]="onStoreButtonClicked"
-    [onEdit]="onEditButtonClicked"></app-primary-item>
+  <ng-container *ngFor="let item of combinedItems">
+    <app-primary-item
+      class="card primary-item"
+      *ngIf="item.showOnDashboard && !item.storage"
+      [item]="item"
+      [onDelete]="onDeleteButtonClicked"
+      [onStore]="onStoreButtonClicked"
+      [onEdit]="onEditButtonClicked"></app-primary-item>
+  </ng-container>
 
   <button (click)="onCreateButtonClicked()">Create Item</button>
 

@@ -25,6 +25,9 @@ import { PrimaryItemComponent } from './components/widgets/primary-item/primary-
 import { ItemFormComponent } from './components/items/shared/item-form/item-form.component';
 import { NgxSmartModalModule } from 'ngx-smart-modal';
 import { SecondaryItemComponent } from './components/widgets/primary-item/secondary-item/secondary-item.component';
+import { StoragesComponent } from './components/storages/storages/storages.component';
+import { EditStorageComponent } from './components/storages/edit-storage/edit-storage.component';
+import { CreateStorageComponent } from './components/storages/create-storage/create-storage.component';
 
 
 @NgModule({
@@ -44,7 +47,10 @@ import { SecondaryItemComponent } from './components/widgets/primary-item/second
     EditItemComponent,
     PrimaryItemComponent,
     ItemFormComponent,
-    SecondaryItemComponent
+    SecondaryItemComponent,
+    StoragesComponent,
+    EditStorageComponent,
+    CreateStorageComponent
   ],
   imports: [
     AppRoutingModule,

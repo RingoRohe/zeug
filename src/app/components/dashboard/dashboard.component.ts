@@ -81,8 +81,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
       this.storages.length &&
       this.types.length
     ) {
-      this.combinedItems = this.itemsService.combineItems(this.items)
-        .filter(item => item.showOnDashboard && !item.storage);
+      this.combinedItems = this.itemsService.combineItems(
+        this.items.filter(
+          item => (item.showOnDashboard || item.isAttachedTo) && !item.storage
+        )
+      );
     }
   }
 

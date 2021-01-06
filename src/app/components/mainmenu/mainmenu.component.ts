@@ -20,6 +20,11 @@ export class MainmenuComponent implements OnInit {
       text: 'Items'
     },
     {
+      target: '/storages',
+      classes: 'icon fas fa-warehouse',
+      text: 'Storages'
+    },
+    {
       target: '/user/profile',
       classes: 'icon fas fa-user',
       text: 'Profile'
