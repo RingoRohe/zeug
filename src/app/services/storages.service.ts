@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { CombinedStorage } from '../models/CombinedStorage';
-import { ZeugItem } from '../models/ZeugItem';
 import { ZeugStorage } from '../models/ZeugStorage';
 import { ApiService } from './api.service';
 import { UserService } from './user.service';
@@ -27,6 +25,10 @@ export class StoragesService {
     return this.storages;
   }
 
+  updateSubscribers() {
+    this.storagesChanged.next(this.storages);
+  }
+
   getStorages() {
     let promise = this.api.listDocuments(this.api.collectionId('storages'));
 
@@ -41,11 +43,7 @@ export class StoragesService {
     });
   }
 
-  updateSubscribers() {
-    this.storagesChanged.next(this.storages);
-  }
-
-  createItem(item: ZeugStorage) {
+  createStorage(item: ZeugStorage): Promise<Object> {
     let promise = this.api.createDocument(
       this.api.collectionId('storages'),
       item
@@ -56,10 +54,32 @@ export class StoragesService {
         this.storages.push(
           ZeugStorage.fromAppwriteDocument(new ZeugStorage(), response)
         );
+        this.updateSubscribers();
       },
       (error) => {
-        console.error('Item not saved', error);
+        console.error('Storage not saved', error);
       }
     );
+
+    return promise;
+  }
+
+  /**
+   *
+   * @param storage Storage to delete
+   */
+  deleteStorage(storage: ZeugStorage): Promise<Object> {
+    let promise = this.api.removeDocument(storage);
+
+    promise.then(
+      (response) => {
+        this.getStorages();
+      },
+      (error) => {
+        console.error('Storage not deleted', error);
+      }
+    );
+
+    return promise;
   }
 }

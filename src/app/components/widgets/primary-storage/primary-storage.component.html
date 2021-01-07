@@ -1,6 +1,7 @@
 <span class="icon fas fa-warehouse"></span>
 <header>
   <h2 class="headline">{{ storage.title }}</h2>
+  <p class="description" *ngIf="storage.description">{{storage.description}}</p>
 </header>
 <div class="content">
   <ul *ngFor="let child of storage.items">

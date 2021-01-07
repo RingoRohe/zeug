@@ -133,6 +133,7 @@ export class ItemsService {
 
     return promise;
   }
+
   /**
    * Moves Item to Storage
    * @param item The Item to be moved

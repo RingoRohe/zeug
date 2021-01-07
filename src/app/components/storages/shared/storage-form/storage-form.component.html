@@ -1,0 +1,26 @@
+<div class="storageForm genericForm">
+
+  <form [formGroup]="storageForm" (ngSubmit)="onStorageFormSubmit(storageForm.value)">
+    <!-- Name -->
+    <label for="title">Title:</label>
+    <input
+      type="text"
+      formControlName="title"
+      id="title"
+      placeholder="My super secure Storage"
+      [ngClass]="{'error': controls['title'].invalid && controls['title'].touched}"
+    >
+    <p class="error message" *ngIf="controls['title'].invalid && controls['title'].touched">
+      Your Storage needs a Title.
+    </p>
+
+    <!-- Description -->
+    <label for="description">Description:</label>
+    <textarea formControlName="description" id="description">
+    </textarea>
+
+    <button type="submit" [disabled]="storageForm.invalid">{{buttonText}}</button>
+  </form>
+
+  <div *ngIf="loading" class="loading"><span>loading...</span></div>
+</div>

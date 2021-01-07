@@ -9,3 +9,16 @@
   <button (click)="onCreateButtonClicked()">Create Storage</button>
 
 </section>
+
+<ngx-smart-modal
+  #createStorageFormModal
+  [dismissable]="false"
+  identifier="createStorageFormModal"
+  (onCloseFinished)="createModalCloseFinished()">
+  <h2>Create a new Storage</h2>
+  <app-storage-form
+    #createForm
+    [onSubmit]="onModalCreateFormSubmit"
+    [buttonText]="'create Storage'"
+  ></app-storage-form>
+</ngx-smart-modal>

@@ -29,6 +29,7 @@ import { StoragesComponent } from './components/storages/storages/storages.compo
 import { EditStorageComponent } from './components/storages/edit-storage/edit-storage.component';
 import { CreateStorageComponent } from './components/storages/create-storage/create-storage.component';
 import { PrimaryStorageComponent } from './components/widgets/primary-storage/primary-storage.component';
+import { StorageFormComponent } from './components/storages/shared/storage-form/storage-form.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { PrimaryStorageComponent } from './components/widgets/primary-storage/pr
     StoragesComponent,
     EditStorageComponent,
     CreateStorageComponent,
-    PrimaryStorageComponent
+    PrimaryStorageComponent,
+    StorageFormComponent
   ],
   imports: [
     AppRoutingModule,
