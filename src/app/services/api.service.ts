@@ -30,8 +30,22 @@ export class ApiService {
     return collection.id;
   }
 
-  listDocuments(collection: string): Promise<Object> {
-    let promise = this.appwrite.database.listDocuments(collection);
+  listDocuments(
+    collectionId: string,
+    filters: string[] = [],
+    offset: number = 0,
+    limit: number = 1000,
+    orderField: string = null,
+    orderType: string = 'DESC'
+  ): Promise<Object> {
+    let promise = this.appwrite.database.listDocuments(
+      collectionId,
+      filters,
+      offset,
+      limit,
+      orderField,
+      orderType
+    );
 
     return promise;
   }

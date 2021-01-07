@@ -1,1 +1,11 @@
-<p>storages works!</p>
+<section class="storages">
+
+  <ng-container *ngFor="let storage of combinedStorages">
+    <app-primary-storage class="card primary-storage" [storage]="storage"
+      [onDelete]="onDeleteButtonClicked" [onEdit]="onEditButtonClicked">
+    </app-primary-storage>
+  </ng-container>
+
+  <button (click)="onCreateButtonClicked()">Create Storage</button>
+
+</section>

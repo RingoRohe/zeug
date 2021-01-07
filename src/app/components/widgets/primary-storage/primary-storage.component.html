@@ -1,0 +1,21 @@
+<span class="icon fas fa-warehouse"></span>
+<header>
+  <h2 class="headline">{{ storage.title }}</h2>
+</header>
+<div class="content">
+  <ul *ngFor="let child of storage.items">
+    <li *ngIf="child">
+      <app-secondary-item class="secondary-storage first" [item]="child"></app-secondary-item>
+    </li>
+  </ul>
+</div>
+<footer class="nopadding">
+  <ul class="actions">
+    <li>
+      <button class="fas fa-trash" (click)="onDeleteStorageButtonClicked()" title="delete"></button>
+    </li>
+    <li>
+      <button class="fas fa-pen" (click)="onEditStorageButtonClicked()" title="edit"></button>
+    </li>
+  </ul>
+</footer>

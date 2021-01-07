@@ -1,0 +1,9 @@
+{{item.title}}
+<ng-container *ngIf="item.children">
+  <ul *ngIf="item.children.length > 0">
+    <li *ngFor="let child of item.children">
+      <i class="arrow fas fa-arrow-right"></i>
+      <app-secondary-item class="secondary-item" [item]="child"></app-secondary-item>
+    </li>
+  </ul>
+</ng-container>
