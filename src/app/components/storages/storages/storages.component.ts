@@ -99,6 +99,12 @@ export class StoragesComponent implements OnInit {
     promise.then(
       (result) => {
         this.toast.success(storage.title + ' deleted.');
+        let itemsPromise = this.itemsService.emptyStorage(storage);
+        itemsPromise.then(result2 => {
+          this.toast.info(result2.toString());
+        }).catch(error => {
+          this.toast.info(error.toString());
+        });
       },
       (error) => {
         this.toast.error('Error when trying to delete ' + storage.title);

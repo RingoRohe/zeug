@@ -149,6 +149,50 @@ export class ItemsService {
   }
 
   /**
+   * Moves Item out of Storage
+   * @param item The Item to be removed
+   * @param storage The Storage the Item should be removed from
+   */
+  removeFromStorage(item: ZeugItem, storage: ZeugStorage): Promise<Object> {
+    item.storage = null;
+    let promise = this.updateItem(item);
+    return promise;
+  }
+
+  /**
+   * Moves all Items out of Storage that are currently stored in it
+   * @param storage The Storage that should be cleared
+   * @returns Promise wich resolves when all Items are removed successfully and fails when one ore more Items could not be removed.
+   */
+  emptyStorage(storage: ZeugStorage): Promise<Object> {
+    let itemsToRemove = this.items.filter(item => item.storage && item.storage.$id == storage.$id );
+
+    let promises: Promise<Object>[] = [];
+    let numDeleted: number = 0;
+    let numErrors: number = 0;
+
+    itemsToRemove.forEach(item => {
+      let promise = this.removeFromStorage(item, storage);
+      promise.then(result => {
+        numDeleted++;
+      }).catch(error => {
+        numErrors++;
+      });
+      promises.push(promise);
+    });
+
+    let returnPromise: Promise<Object> = new Promise((resolve, reject) => {
+      Promise.all(promises).then(() => {
+        resolve(`${numDeleted} Item(s) removed from Storage`);
+      }).catch(() => {
+        reject(`${numDeleted} Item(s) removed from Storage, ${numErrors} Item(s) could not be removed.`);
+      });
+    })
+
+    return returnPromise;
+  }
+
+  /**
    * Takes an Array of ZeugItems and returns an Array of CombinedItems which includes Subitems (Children) that are linked via isAttachedTo Attribute
    *
    * @param items Array of ZeugItems

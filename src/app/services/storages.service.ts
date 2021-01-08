@@ -11,7 +11,10 @@ export class StoragesService {
   storages: ZeugStorage[] = [];
   storagesChanged: Subject<ZeugStorage[]> = new Subject<ZeugStorage[]>();
 
-  constructor(private api: ApiService, private userService: UserService) {
+  constructor(
+    private api: ApiService,
+    private userService: UserService
+  ) {
     userService.userHasChanged.subscribe((response) => {
       this.getStorages();
     });
@@ -72,10 +75,10 @@ export class StoragesService {
     let promise = this.api.removeDocument(storage);
 
     promise.then(
-      (response) => {
+      response => {
         this.getStorages();
       },
-      (error) => {
+      error => {
         console.error('Storage not deleted', error);
       }
     );
