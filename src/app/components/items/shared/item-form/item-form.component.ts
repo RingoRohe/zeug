@@ -92,7 +92,8 @@ export class ItemFormComponent implements OnInit {
       formData.isAttachedTo = false;
     }
 
-    this.item = ZeugItem.fromObject(formData);
+    Object.assign(this.item, formData);
+    this.item = ZeugItem.fromObject(this.item);
 
     this.onSubmit(this.item);
   }

@@ -1,6 +1,6 @@
 import { Component, AfterViewInit, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { NgPopupsService } from 'ng-popups';
 import { ToastrService } from 'ngx-toastr';
 import { ZeugItem } from 'src/app/models/ZeugItem';
 import { ZeugType } from 'src/app/models/ZeugType';
@@ -24,8 +24,8 @@ export class EditItemComponent implements OnInit, AfterViewInit {
     private typesService: TypesService,
     private itemsService: ItemsService,
     private toast: ToastrService,
-    private popups: NgPopupsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +66,7 @@ export class EditItemComponent implements OnInit, AfterViewInit {
         this.formComponent.reset();
         this.formComponent.update(this.item);
         this.toast.success('Item updated.');
+        this.location.back();
       },
       (error) => {
         this.toast.error('Whoops. Item not updated.');

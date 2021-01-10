@@ -21,9 +21,10 @@ export class StoragesComponent implements OnInit {
   combinedStorages: CombinedStorage[] = [];
 
   createModal: NgxSmartModalComponent;
+  editModal: NgxSmartModalComponent;
 
   @ViewChild('createForm') createFormComponent: StorageFormComponent;
-  // @ViewChild('editForm') editFormComponent: ItemFormComponent;
+  @ViewChild('editForm') editFormComponent: StorageFormComponent;
   // @ViewChild('storageSelector') storageSelector: NgxSmartModalComponent;
 
   constructor(
@@ -51,7 +52,7 @@ export class StoragesComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.createModal = this.modalService.get('createStorageFormModal');
-    // this.editModal = this.modalService.get('editItemFormModal');
+    this.editModal = this.modalService.get('editStorageFormModal');
     // this.storageModal = this.modalService.get('storageSelector');
   }
 
@@ -78,6 +79,24 @@ export class StoragesComponent implements OnInit {
     this.createModal.open();
   };
 
+  onModalCreateFormSubmit = (storage: ZeugStorage) => {
+    let promise = this.storagesService.createStorage(storage);
+
+    promise.then(
+      (result) => {
+        this.createModal.close();
+        this.toast.success('Storage created.');
+      },
+      (error) => {
+        this.toast.error('Whoops. Storage not created.');
+      }
+    );
+  };
+
+  createModalCloseFinished() {
+    this.createFormComponent.reset();
+  }
+
   onDeleteButtonClicked = (storage: CombinedStorage) => {
     this.popups
       .confirm('Do You really want to delete ' + storage.title + '?', {
@@ -100,11 +119,13 @@ export class StoragesComponent implements OnInit {
       (result) => {
         this.toast.success(storage.title + ' deleted.');
         let itemsPromise = this.itemsService.emptyStorage(storage);
-        itemsPromise.then(result2 => {
-          this.toast.info(result2.toString());
-        }).catch(error => {
-          this.toast.info(error.toString());
-        });
+        itemsPromise
+          .then((result2) => {
+            this.toast.info(result2.toString());
+          })
+          .catch((error) => {
+            this.toast.info(error.toString());
+          });
       },
       (error) => {
         this.toast.error('Error when trying to delete ' + storage.title);
@@ -112,25 +133,27 @@ export class StoragesComponent implements OnInit {
     );
   }
 
-  onEditButtonClicked = () => {
-    this.toast.info('edit clicked');
+  onEditButtonClicked = (storage: CombinedStorage) => {
+    // this.router.navigate(['storages/edit/', storage.$id]);
+    this.editFormComponent.update(storage.asZeugStorage());
+    this.editModal.open();
   };
 
-  onModalCreateFormSubmit = (storage: ZeugStorage) => {
-    let promise = this.storagesService.createStorage(storage);
+  onModalEditFormSubmit = (storage: ZeugStorage) => {
+    let promise = this.storagesService.updateStorage(storage);
 
     promise.then(
       (result) => {
-        this.createModal.close();
-        this.toast.success('Storage created.');
+        this.editModal.close();
+        this.toast.success('Storage updated.');
       },
       (error) => {
-        this.toast.error('Whoops. Storage not created.');
+        this.toast.error('Whoops. Storage not editd.');
       }
     );
   };
 
-  createModalCloseFinished() {
-    this.createFormComponent.reset();
+  editModalCloseFinished() {
+    this.editFormComponent.reset();
   }
 }

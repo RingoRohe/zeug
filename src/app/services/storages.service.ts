@@ -11,10 +11,7 @@ export class StoragesService {
   storages: ZeugStorage[] = [];
   storagesChanged: Subject<ZeugStorage[]> = new Subject<ZeugStorage[]>();
 
-  constructor(
-    private api: ApiService,
-    private userService: UserService
-  ) {
+  constructor(private api: ApiService, private userService: UserService) {
     userService.userHasChanged.subscribe((response) => {
       this.getStorages();
     });
@@ -46,10 +43,23 @@ export class StoragesService {
     });
   }
 
-  createStorage(item: ZeugStorage): Promise<Object> {
+  /**
+   *
+   * @param documentId ID of Item to be found
+   */
+  getStorage(documentId: string) {
+    let promise = this.api.getDocument(
+      this.api.collectionId('storages'),
+      documentId
+    );
+
+    return promise;
+  }
+
+  createStorage(storage: ZeugStorage): Promise<Object> {
     let promise = this.api.createDocument(
       this.api.collectionId('storages'),
-      item
+      storage
     );
 
     promise.then(
@@ -69,16 +79,39 @@ export class StoragesService {
 
   /**
    *
+   * @param storage Item to update
+   */
+  updateStorage(storage: ZeugStorage) {
+    let promise = this.api.updateDocument(
+      this.api.collectionId('storages'),
+      storage.$id,
+      storage.asOrdinaryObject()
+    );
+
+    promise.then(
+      (response) => {
+        this.getStorages();
+      },
+      (error) => {
+        console.error('Storage not updated', error);
+      }
+    );
+
+    return promise;
+  }
+
+  /**
+   *
    * @param storage Storage to delete
    */
   deleteStorage(storage: ZeugStorage): Promise<Object> {
     let promise = this.api.removeDocument(storage);
 
     promise.then(
-      response => {
+      (response) => {
         this.getStorages();
       },
-      error => {
+      (error) => {
         console.error('Storage not deleted', error);
       }
     );

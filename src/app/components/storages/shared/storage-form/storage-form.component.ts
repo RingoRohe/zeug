@@ -27,7 +27,8 @@ export class StorageFormComponent implements OnInit {
   onStorageFormSubmit(formData): void {
     this.loading = true;
 
-    this.storage = ZeugStorage.fromObject(formData);
+    Object.assign(this.storage, formData);
+    this.storage = ZeugStorage.fromObject(this.storage);
 
     this.onSubmit(this.storage);
   }

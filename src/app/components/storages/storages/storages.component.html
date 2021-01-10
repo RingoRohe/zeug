@@ -22,3 +22,16 @@
     [buttonText]="'create Storage'"
   ></app-storage-form>
 </ngx-smart-modal>
+
+<ngx-smart-modal
+  #editStorageFormModal
+  [dismissable]="false"
+  identifier="editStorageFormModal"
+  (onCloseFinished)="editModalCloseFinished()">
+  <h2>Edit a new Storage</h2>
+  <app-storage-form
+    #editForm
+    [onSubmit]="onModalEditFormSubmit"
+    [buttonText]="'edit Storage'"
+  ></app-storage-form>
+</ngx-smart-modal>
